@@ -3,9 +3,10 @@ var express = require("express");
 var app = express();
 
 var path = require("path");
-app.use(express.static(path.join(__dirname, "./client/static")));
-app.set("views", path.join(__dirname, "./client/views"));
-app.set("view engine", "ejs");
+//app.use(express.static(path.join(__dirname, "./client/static")));
+app.use(express.static(__dirname + '/public/dist/public'));
+//app.set("views", path.join(__dirname, "./client/views"));
+//app.set("view engine", "ejs");
 
 // if using session
 var session = require("express-session");
