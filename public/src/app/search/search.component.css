@@ -1,0 +1,16 @@
+#searchBar {
+    width: 30%;
+    position: absolute;
+    right: 0;
+    border-radius: 10px;
+    border: 2px solid gray;
+    padding: 1%;
+    background: rgba(255, 255, 255, 0.75);
+    margin-top: 5px;
+}
+
+#showSearch {
+    position: absolute;
+    right: 1%;
+    margin-top: 5px;      
+}
