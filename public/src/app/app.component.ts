@@ -12,6 +12,5 @@ export class AppComponent {
   constructor(private _httpService: HttpService) {}
 
   ngOnInit() {
-    console.log("?????");
   }
 }
