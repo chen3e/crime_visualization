@@ -2,10 +2,8 @@
 var express = require("express");
 var app = express();
 
-var path = require("path");
-app.use(express.static(path.join(__dirname, "./client/static")));
-app.set("views", path.join(__dirname, "./client/views"));
-app.set("view engine", "ejs");
+const path = require("path")
+app.use(express.static(__dirname + "/public/dist/public"));
 
 // if using session
 var session = require("express-session");
@@ -19,7 +17,7 @@ app.use(session({
 
 // if using form data
 var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ extended: true }));
 
 // if using sockets
 // const server = app.listen(8000);
