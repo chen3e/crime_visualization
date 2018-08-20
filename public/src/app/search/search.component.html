@@ -1,10 +1,14 @@
 <button class="btn btn-secondary" id="showSearch">Filter Results</button>
 <div class="container" id="searchBar">
     <h2>Search for Crimes</h2>
-    <form>
+    <form (submit)="filterCrimes()">
+        <div class="form-group">
+            <label>Keyword:</label>
+            <input class="form-control" type="type" name="keyword" [(ngModel)]="searchParams.keyword">
+        </div>
         <div class="form-group">
             <label>Crime type:</label>
-            <select multiple class="form-control" name="categoryid">
+            <select multiple class="form-control" name="categoryid" [(ngModel)]="searchParams.categoryid">
                 <option value="1">Battery</option>
                 <option value="2">Assault</option>
                 <option value="3">Motor Vehicle Theft</option>
@@ -30,7 +34,7 @@
         </div>
         <div class="form-group">
             <label>Region:</label>
-            <select multiple class="form-control" name="region">
+            <select class="form-control" name="region" [(ngModel)]="searchParams.region">
                 <option value="farNorthSide">Far North Side</option>
                 <option value="northwestSide">Northwest Side</option>
                 <option value="northSide">North Side</option>
@@ -45,19 +49,20 @@
         <div class="form-group">
             <label>Date:</label>
             <div class="row form-row">
-                <input class="form-control col-sm-3" type="date" name="startDate">
+                <input class="form-control col-sm-3" type="date" name="startDate" [(ngModel)]="searchParams.start_date">
                 <p class="col-sm-1">to</p>
-                <input class="form-control col-sm-3" type="date" name="endDate">
+                <input class="form-control col-sm-3" type="date" name="endDate" [(ngModel)]="searchParams.end_date">
             </div>
         </div>
-        <div class="form-group">
+        <!-- The API we're using does have time data, however every crime apparently happened at 12AM, soooo.... -->
+        <!-- <div class="form-group">
             <label>Time:</label>
             <div class="row form-row">
-                <input class="form-control col-sm-3" type="time" name="startTime">
+                <input class="form-control col-sm-3" type="time" name="startTime" [(ngModel)]="searchParams.start_time">
                 <p class="col-sm-1">to</p>
-                <input class="form-control col-sm-3" type="time" name="endTime">
+                <input class="form-control col-sm-3" type="time" name="endTime" [(ngModel)]="searchParams.end_time">
             </div>
-        </div>
+        </div> -->
         <input class="btn btn-success" type="submit" value="Search">
     </form>
 </div>

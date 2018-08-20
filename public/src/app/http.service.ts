@@ -11,4 +11,8 @@ export class HttpService {
     getCrimes() {
         return this._http.get("/crimes");
     }
+
+    filterCrimes(searchParams) {
+        return this._http.post("/crimes", searchParams);
+    }
 }

@@ -19,7 +19,7 @@ export class MapComponent implements OnInit {
             console.log(data);
             console.log("Crimes:")
             this.crimes = JSON.parse(data["data"])['items'];
-            console.log(this.crimes[0]);
+            console.log(this.crimes);
         })
     }
 }
