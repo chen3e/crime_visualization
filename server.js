@@ -20,7 +20,7 @@ app.use(session({
 
 // if using form data
 var bodyParser = require("body-parser");
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({ extended: true }));
 
 // if using sockets
 // const server = app.listen(8000);
