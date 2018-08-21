@@ -9,9 +9,10 @@ import { HttpService } from '../http.service';
 export class MapComponent implements OnInit {
     crimes = [];
 
-    constructor(private _httpService: HttpService) { }
+    constructor(private _httpService: HttpService) {
+    }
 
-    ngOnInit() {
+    ngOnInit() { 
     }
     getCrimes() {
         let observable = this._httpService.getCrimes();
@@ -20,6 +21,7 @@ export class MapComponent implements OnInit {
             console.log("Crimes:")
             this.crimes = JSON.parse(data["data"])['items'];
             console.log(this.crimes);
+            return this.crimes;
         })
     }
 }

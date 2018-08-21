@@ -20,8 +20,10 @@
     <!-- Google maps JS -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt7vqsxxzPKE6DPsHGF59JZfBZ-BOYBb0&libraries=visualization"
     async defer></script>
-    
+
     <script>
+        let crimes = [];
+
         var map;
         // This function is the callback defined in script url callback= parameter. MUST MATCH
         var map, heatmap;
@@ -38,6 +40,10 @@
                 { location: new google.maps.LatLng(41.890, -87.632), weight: 1000 },
                 { location: new google.maps.LatLng(41.890, -87.633), weight: 1000 },
             ];
+            for (let i = 0; i < crimes.length; i++) {
+                heatmapData.push({ location: new google.maps.LatLng(Number(crimes[i].latitude), Number(crimes[i].longitude)), weight: 1000 });
+            }
+            console.log(heatmapData)
             map = new google.maps.Map(document.getElementById('map'), {
                 center: chicago,
                 zoom: 16
@@ -77,6 +83,17 @@
             heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
         }
 
+        $.ajax({
+            url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.881&lon=-87.623&num=500",
+            headers: { "X-Mashape-Key": "rSCiGbEc2amshYK4i3bGFu9ltLZWp1D9W11jsnoxBKLY0ixRyW", "Accept": "application/json" },
+            type: "GET",
+            success: function (data) {
+                crimes = JSON.parse(data)['items'];
+                console.log(crimes);
+                initMap();
+            }
+        });
+
         $(document).ready(function () {
             $("#searchBar").hide();
             let showSearch = false;
@@ -91,7 +108,6 @@
                     showSearch = false;
                 }
             })
-            initMap();
         });
     </script>
 </body>
