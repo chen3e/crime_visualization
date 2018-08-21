@@ -19,7 +19,7 @@ export class MapComponent implements OnInit {
         observable.subscribe(data => {
             console.log(data);
             console.log("Crimes:")
-            this.crimes = JSON.parse(data["data"])['items'];
+            this.crimes = JSON.parse(data["data"])['items'            ];
             console.log(this.crimes);
             return this.crimes;
         })

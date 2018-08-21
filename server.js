@@ -22,10 +22,6 @@ app.use(session({
 var bodyParser = require("body-parser");
 app.use(bodyParser.json({ extended: true }));
 
-// if using sockets
-// const server = app.listen(8000);
-// const io = require("socket.io")(server);
-
 require("./server/config/routes")(app)
 
 // if not using sockets
