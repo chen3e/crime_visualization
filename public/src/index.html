@@ -84,12 +84,27 @@
         }
 
         $.ajax({
-            url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.881&lon=-87.623&num=500",
-            headers: { "X-Mashape-Key": "rSCiGbEc2amshYK4i3bGFu9ltLZWp1D9W11jsnoxBKLY0ixRyW", "Accept": "application/json" },
+            //https://yourmapper2.p.mashape.com/markers?&f=json&id=182&minlat=41.645&maxlat=41.646&minlon=-87.531&maxlon=-87.530&start=2012-12-01&end=2012-12-31num=500
+            url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.881&lon=-87.623&num=5000",
+            //url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.881&lon=-87.623&num=5000",
+            headers: { "X-Mashape-Key": "fNutKhjM8Smshcjz2VSdocmRagjMp1ro8g6jsnnRhXEuIpICA4", "Accept": "application/json" },
             type: "GET",
             success: function (data) {
+                console.log("Success!");
                 crimes = JSON.parse(data)['items'];
-                console.log(crimes);
+                console.log("First crimes:",crimes);
+/*                 $.ajax({
+                    url: "https://yourmapper2.p.mashape.com/markers?&f=json&id=182&minlat=41.650&maxlat=41.655&minlon=-87.525&maxlon=-87.520&start=2012-12-01&end=2012-12-31num=500",
+                    headers: { "X-Mashape-Key": "rSCiGbEc2amshYK4i3bGFu9ltLZWp1D9W11jsnoxBKLY0ixRyW", "Accept": "application/json" },
+                    type: "GET",
+                    success: function (data) {
+                        secondCrimes = JSON.parse(data)['items'];
+                        for (var i = 0; i < secondCrimes.length; i++){
+                            crimes.push(secondCrimes[i]);
+                        }
+                        console.log("Second crimes:", crimes);
+                    }
+                }) */
                 initMap();
             }
         });
