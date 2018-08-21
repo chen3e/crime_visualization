@@ -16,6 +16,7 @@
     "express-flash": "0.0.2",
     "express-session": "^1.15.6",
     "file-system": "^2.2.2",
+    "mongoose": "^5.2.9",
     "socket.io": "^2.1.1",
     "unirest": "^0.5.1"
   },
