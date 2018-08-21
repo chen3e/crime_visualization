@@ -1,14 +1,14 @@
 <button class="btn btn-secondary" id="showSearch">Filter Results</button>
 <div class="container" id="searchBar">
     <h2>Search for Crimes</h2>
-    <form (submit)="filterCrimes()">
+    <form id="searchForm">
         <div class="form-group">
             <label>Keyword:</label>
-            <input class="form-control" type="type" name="keyword" [(ngModel)]="searchParams.keyword">
+            <input id="keyword" class="form-control" type="type" name="keyword" [(ngModel)]="searchParams.keyword">
         </div>
         <div class="form-group">
             <label>Crime type:</label>
-            <select multiple class="form-control" name="categoryid" [(ngModel)]="searchParams.categoryid">
+            <select id="categoryid" multiple="multiple" class="form-control" name="categoryid" [(ngModel)]="searchParams.categoryid">
                 <option value="1">Battery</option>
                 <option value="2">Assault</option>
                 <option value="3">Motor Vehicle Theft</option>
@@ -49,9 +49,7 @@
         <div class="form-group">
             <label>Date:</label>
             <div class="row form-row">
-                <input class="form-control col-sm-3" type="date" name="startDate" [(ngModel)]="searchParams.start_date">
-                <p class="col-sm-1">to</p>
-                <input class="form-control col-sm-3" type="date" name="endDate" [(ngModel)]="searchParams.end_date">
+                <input id="date" class="form-control" type="date" name="date" [(ngModel)]="searchParams.start_date">
             </div>
         </div>
         <!-- The API we're using does have time data, however every crime apparently happened at 12AM, soooo.... -->
