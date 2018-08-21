@@ -50,3 +50,4 @@ module.exports = {
 //Mandy KEY for yourmapper: rSCiGbEc2amshYK4i3bGFu9ltLZWp1D9W11jsnoxBKLY0ixRyW
 //Elliott's key
 // 'QNVCYMTHZ0mshzFl0IBVoTRvjdLCp1kMFGVjsn51wd4liyvJWe'
+//  Ki-Zenn's: b9cHBlr2PUmsh98hyrF30fUgJhNFp1d4QMFjsng2zNpmyY0H0C
