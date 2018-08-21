@@ -1,4 +1,4 @@
-﻿
+<script src="../assets/googleAPI.js" async defer></script>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,28 +9,19 @@
 </head>
 
 <body>
+  <h1>PRESS CTRL+F5 SILLY!</h1>
   <h1>map works</h1>
   <button class="btn btn-secondary" (click)="getCrimes()">Get Crimes</button>
 
   <app-search></app-search>
   <div id="map"></div>
   <div id="floating-panel">
-    <button onclick="toggleHeatmap()">Toggle Heatmap</button>
-    <button onclick="changeGradient()">Change gradient</button>
-    <button onclick="changeRadius()">Change radius</button>
-    <button onclick="changeOpacity()">Change opacity</button>
+    <button (click)="toggleHeatmap()">Toggle Heatmap</button>
+    <button (click)="changeGradient()">Change gradient</button>
+    <button (click)="changeRadius()">Change radius</button>
+    <button (click)="changeOpacity()">Change opacity</button>
   </div>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAt7vqsxxzPKE6DPsHGF59JZfBZ-BOYBb0&callback=initMap"
-          async defer></script>
-  <script>
-    var map;
-    function initMap() {
-      map = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: -34.397, lng: 150.644 },
-        zoom: 8
-      });
-    }
-  </script>
+  
 
 </body>
 </html>
