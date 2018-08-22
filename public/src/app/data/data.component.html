@@ -1,0 +1,26 @@
+<table class="table table-striped" >
+  <thead class="thead-dark" >
+    <tr>
+      <th scope="col" >Address</th>
+      <th scope="col" >City</th>
+      <th scope="col" >Category</th>
+      <th scope="col" >Date</th>
+      <th scope="col" >Time</th>
+      <th scope="col" >Location</th>
+      <th scope="col" >Details</th>
+      <th scope="col" >Arrest Made</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let crime of crimes" >
+      <td>{{crime.address}}</td>
+      <td>{{crime.city}}</td>
+      <td>{{crime.catname}}</td>
+      <td>{{crime.date}}</td>
+      <td>{{crime.description.Time}}</td>
+      <td>{{crime.description.Location}}</td>
+      <td>{{crime.description.Details}}</td>
+      <td>{{crime.description['Arrest Made']}}</td>
+    </tr>
+  </tbody>
+</table>

@@ -8,7 +8,7 @@ module.exports = {
         // These code snippets use an open-source library. http://unirest.io/nodejs
         unirest.get("https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.881&lon=-87.623&num=500&start=2015-11-22&end=2015-11-22")
         // Put api key here
-        .header("X-Mashape-Key", "fNutKhjM8Smshcjz2VSdocmRagjMp1ro8g6jsnnRhXEuIpICA4")
+        .header("X-Mashape-Key", "b9cHBlr2PUmsh98hyrF30fUgJhNFp1d4QMFjsng2zNpmyY0H0C")
         .header("Accept", "application/json")
         .end(function (result) {
             console.log(result.status, result.headers);
@@ -37,7 +37,7 @@ module.exports = {
 
         unirest.get(`https://yourmapper2.p.mashape.com/markers?c=${searchParams.categoryid}&center=0&end=${searchParams.end_date}&f=json&id=182&lat=${searchParams.lat}&lon=${searchParams.lon}&num=500&search=${searchParams.keyword}&start=${searchParams.start_date}`)
         // Put api key here
-        .header("X-Mashape-Key", "fNutKhjM8Smshcjz2VSdocmRagjMp1ro8g6jsnnRhXEuIpICA4")
+        .header("X-Mashape-Key", "b9cHBlr2PUmsh98hyrF30fUgJhNFp1d4QMFjsng2zNpmyY0H0C")
         .header("Accept", "application/json")
         .end(function (result) {
             console.log(result.status, result.headers);
