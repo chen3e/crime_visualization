@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MapComponent } from './map/map.component';
 import { SearchComponent } from './search/search.component';
 import { DataComponent } from './data/data.component';
+import { GraphComponent } from './graph/graph.component';
 
 const routes: Routes = [
     {
@@ -15,6 +16,9 @@ const routes: Routes = [
     },
     {
         path: "data", component: DataComponent
+    },
+    {
+        path:'graph', component:GraphComponent
     }
 ];
 
