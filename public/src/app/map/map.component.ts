@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 import { } from '@types/googlemaps';
+import { url } from 'inspector';
 
 declare var google: any;
 
@@ -56,10 +57,17 @@ export class MapComponent implements OnInit {
             markers.push({ position: new google.maps.LatLng(Number(this.crimes[i].latitude), Number(this.crimes[i].longitude)), map: this.map, title: this.crimes[i].catname, content: content });
         }
         for (let i = 0; i < markers.length; i++) {
+            let title = markers[i].title.split(" ").join("")
+            console.log(title);
+            var image = {
+                url: `assets/img/${title}.png`,
+                scaledSize: new google.maps.Size(48, 48)
+            }
             var infowindow = new google.maps.InfoWindow({
                 content: markers[i].content
             });
             var marker = new google.maps.Marker({
+                icon : image,
                 position: markers[i].position,
                 map: this.map,
                 title: markers[i].title
