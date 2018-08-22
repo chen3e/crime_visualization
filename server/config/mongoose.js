@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-mongoose.connect("mongodb://localhost/quotes");
+mongoose.connect("mongodb://localhost/crimes");
 mongoose.Promise = global.Promise;
 
 var path = require("path");
