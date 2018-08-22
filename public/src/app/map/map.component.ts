@@ -14,6 +14,8 @@ export class MapComponent implements OnInit {
     map: any;
     heatmap: any;
     chicago = { lat: 41.8974, lng: -87.6352 };
+    markers = [];
+    visiblity = true;
 
     constructor(private _httpService: HttpService) { }
 
@@ -33,7 +35,6 @@ export class MapComponent implements OnInit {
             let description = {};
             for (let j = 0; j < this.crimes[i].description.length; j++) {
                 this.crimes[i].description[j] = this.crimes[i].description[j].split(":");
-                console.log(this.crimes[i].description[j]);
                 if (this.crimes[i].description[j][2]) {
                     description[this.crimes[i].description[j][0]] = this.crimes[i].description[j][1] + ":" + this.crimes[i].description[j][2].replace("&lt;", "");
                 }
@@ -45,7 +46,6 @@ export class MapComponent implements OnInit {
                 }
             }
             this.crimes[i].description = description;
-            console.log(this.crimes[i].description);
             let content = `<div id="content">` +
                 `<div id="siteNotice">` +
                 "</div>" +
@@ -76,9 +76,7 @@ export class MapComponent implements OnInit {
                 infowindow.close(this.map, marker);
               }
             })(marker,infowindow));
-            // marker.addListener("hover", function() {
-            //     infowindow.open(map, marker);
-            // })
+            this.markers.push(marker);
         }
         console.log(markers);
         this.initHeatMap();
@@ -93,6 +91,22 @@ export class MapComponent implements OnInit {
             data: heatmapData,
             map: this.map
         });
+    }
+    toggleMarkers() {
+        for (let i = 0; i < this.markers.length; i++) {
+            if (this.visiblity) {
+                this.markers[i].setVisible(false);
+            }
+            else {
+                this.markers[i].setVisible(true);
+            }
+        }
+        if (this.visiblity) {
+            this.visiblity = false;
+        }
+        else {
+            this.visiblity = true;
+        }
     }
     toggleHeatmap() {
         this.heatmap.setMap(this.heatmap.getMap() ? null : this.map);

@@ -9,11 +9,10 @@ import { MapComponent } from '../map/map.component';
 })
 export class SearchComponent implements OnInit {
     searchParams = {
-        keyword: "",
+        keyword: null,
         categoryid : null,
         region: null,
-        start_date: null,
-        end_date: null
+        date: null
     };
 
     constructor(private _httpService: HttpService, private _map: MapComponent) { }
@@ -22,21 +21,13 @@ export class SearchComponent implements OnInit {
     }
 
     filterCrimes() {
-        let catStr = "";
-        for (let i = 0; i < this.searchParams.categoryid.length; i++) {
-            catStr += this.searchParams.categoryid[i];
-            if (i !== this.searchParams.categoryid.length - 1) {
-                catStr += ",";
-            }
-        }
-        this.searchParams.categoryid = catStr;
-
         let observable = this._httpService.filterCrimes(this.searchParams);
         observable.subscribe(data => {
             console.log(data);
             console.log("Crimes:")
-            this._map.crimes = JSON.parse(data["data"])['items'];
+            this._map.crimes = data["data"];
             console.log(this._map.crimes);
+            this._map.initMap();
         })
     }
 }
