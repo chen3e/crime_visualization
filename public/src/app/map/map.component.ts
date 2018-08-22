@@ -57,7 +57,6 @@ export class MapComponent implements OnInit {
         }
         for (let i = 0; i < markers.length; i++) {
             let title = markers[i].title.split(" ").join("")
-            console.log(title);
             var image = {
                 url: `assets/img/${title}.png`,
                 scaledSize: new google.maps.Size(48, 48)
@@ -73,13 +72,11 @@ export class MapComponent implements OnInit {
             });
             google.maps.event.addListener(marker, 'mouseover', (function (marker, infowindow) {
                 return function () {
-                    console.log(infowindow);
                     infowindow.open(this.map, marker);
                 }
           })(marker, infowindow));
             google.maps.event.addListener(marker, 'mouseout', (function(marker, infowindow){
               return function () {
-                console.log(infowindow);
                 infowindow.close(this.map, marker);
               }
             })(marker,infowindow));
@@ -141,7 +138,6 @@ export class MapComponent implements OnInit {
         this.heatmap.set('radius', this.heatmap.get('radius') ? null : 20);
     }
     changeOpacity() {
-       
         this.heatmap.set('opacity', this.heatmap.get('opacity') ? null : 0.2);
     }
     getCrimes() {
