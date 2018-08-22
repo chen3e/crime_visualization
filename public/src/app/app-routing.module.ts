@@ -19,6 +19,9 @@ const routes: Routes = [
     },
     {
         path:'graph', component:GraphComponent
+    },
+    {
+        path:'map', component: MapComponent
     }
 ];
 
