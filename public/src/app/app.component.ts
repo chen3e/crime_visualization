@@ -10,7 +10,6 @@ export class AppComponent {
   title = 'public';
 
   constructor(private _httpService: HttpService) {
-    console.log("Uhhmmm")
   }
 
   ngOnInit() {
