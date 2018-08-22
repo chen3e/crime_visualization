@@ -14,16 +14,12 @@ module.exports = {
         //     // io.emit("crime_data", { message: "Success!", data: result.body })
         //     return res.json({ message: "Success!", data: result.body });
         // });
-<<<<<<< HEAD
-        
-=======
         Crime.find({}, function(err, data) {
             if (err) {
                 console.log(err);
             }
             return res.json({ message: "Success!", data: data });
         })
->>>>>>> 4ba0dbf946f0c9e3cc1ed0b58524f0031e5ae951
     },
 
     filterCrimes: function(req, res) {
