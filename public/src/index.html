@@ -26,19 +26,6 @@
 
     <script>
         $(document).ready(function () {
-            // $.ajax({
-            //     url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.881&lon=-87.623&num=500&start=2015-11-22&end=2015-11-22",
-            //     headers: { "X-Mashape-Key": "fNutKhjM8Smshcjz2VSdocmRagjMp1ro8g6jsnnRhXEuIpICA4", "Accept": "application/json" },
-            //     type: "GET",
-            //     success: function (data) {
-            //         crimes = JSON.parse(data)['items'];
-            //         console.log(crimes);
-            //         initMap();
-            //         toggleHeatmap();
-            //     }
-            // });
-            // initMap();
-            // toggleHeatmap();
             console.log("READY!!!")
 
             $("#searchBar").hide();
@@ -54,44 +41,6 @@
                     showSearch = false;
                 }
             })
-
-            // $("#searchForm").submit(function() {
-            //     let searchParams = {
-            //         keyword: $('#keyword').val(),
-            //         categoryid: [],
-            //         end_date: $('#date').val() || '2015-11-22',
-            //         lat: 41.881,
-            //         lon: -87.623,
-            //         start_date: $('#date').val() || '2015-11-22'
-            //     }
-            //     console.log(searchParams.categoryid);
-
-            //     if (searchParams.start_date) {
-            //         searchParams.start_date = new Date(searchParams.start_date).toISOString();
-            //     }
-            //     if (searchParams.end_date) {
-            //         searchParams.end_date = new Date(searchParams.end_date).toISOString();
-            //     }
-
-            //     $('#categoryid').children(':selected').each(function() {
-            //         searchParams.categoryid.push($(this).val().split(":")[1].split("'")[1]);
-            //     })
-
-            //     searchParams.categoryid = searchParams.categoryid.join(",");
-            //     console.log(searchParams);
-
-            //     // $.ajax({
-            //     //     url: `https://yourmapper2.p.mashape.com/markers?c=${searchParams.categoryid}&center=0&end=${searchParams.end_date}&f=json&id=182&lat=${searchParams.lat}&lon=${searchParams.lon}&num=500&search=${searchParams.keyword}&start=${searchParams.start_date}`,
-            //     //     headers: { "X-Mashape-Key": "fNutKhjM8Smshcjz2VSdocmRagjMp1ro8g6jsnnRhXEuIpICA4", "Accept": "application/json" },
-            //     //     type: "GET",
-            //     //     success: function (data) {
-            //     //         console.log(data);
-            //     //         crimes = JSON.parse(data)['items'];
-            //     //         console.log(crimes);
-            //     //         initMap();
-            //     //     }
-            //     // });
-            // })
         });
     </script>
 </body>

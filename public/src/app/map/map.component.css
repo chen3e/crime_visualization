@@ -1,9 +1,29 @@
+#info {
+    display: inline-block;
+    vertical-align: top;
+    width: 25%;
+    color: white;
+    padding: 2%;
+    height: 80vh;
+}
+
 #map {
+    display: inline-block;
     min-height:400px;
-    width:100%;
+    width: 75%;
     border:1px solid blue;
     height: 75vh;
-    margin-top: 10px;
+    margin-top: 1vh;
+    border-radius: 20px;
+}
+
+#floating-panel {
+    margin-top: 2vh;
+    margin-left: 25%;
+}
+
+#floating-panel * {
+    margin-left: 2%;
 }
 
 html, body{

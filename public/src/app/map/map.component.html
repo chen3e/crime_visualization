@@ -1,7 +1,3 @@
-<button class="btn btn-secondary" (click)="getCrimes()">Get Crimes</button>
-
-<app-search></app-search>
-<div id="map"></div>
 <div id="floating-panel">
     <button class="btn btn-secondary" (click)="toggleMarkers()">Toggle Markers</button>
     <button class="btn btn-secondary" (click)="toggleHeatmap()">Toggle Heatmap</button>
@@ -9,4 +5,12 @@
     <button class="btn btn-secondary" (click)="changeRadius()">Change radius</button>
     <button class="btn btn-secondary" (click)="changeOpacity()">Change opacity</button>
 </div>
+<app-search></app-search>
+
+<div id="info">
+    <h2>Crime in Chicago</h2>
+    <p>This map is a representation of crime in Chicago from March to November in the year 2015. By default this map only shows the crime for November 22, 2015. Use the filter results options to see crimes for multiple dates. Hover over any point to see more information. To see this information as a table, see data. To see graphical representations of crime statistics go to graphs. To report a crime, see report a crime. Remember to always call 911 in the case of an emergency.</p>
+</div>
+
+<div id="map"></div>
 
