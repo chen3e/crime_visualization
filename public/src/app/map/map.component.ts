@@ -30,7 +30,7 @@ export class MapComponent implements OnInit {
     initMap() {
         this.map = new google.maps.Map(document.getElementById('map'), {
             center: this.chicago,
-            zoom: 16
+            zoom: 12
         });
         var markers = [];
         for (let i = 0; i < this.crimes.length; i++) {
