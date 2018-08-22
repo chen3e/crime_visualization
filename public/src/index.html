@@ -28,7 +28,7 @@
         // This function is the callback defined in script url callback= parameter. MUST MATCH
         var map, heatmap;
         function initMap() {
-            var chicago = { lat: 41.53502, lng: -87.38068 };
+            var chicago = { lat: 41.897281, lng: -87.635102 };
             var heatmapData = [
                 { location: new google.maps.LatLng(41.897, -87.635), weight: 1000 },
                 { location: new google.maps.LatLng(41.897, -87.637), weight: 1000 },
@@ -82,23 +82,89 @@
         function changeOpacity() {
             heatmap.set('opacity', heatmap.get('opacity') ? null : 0.2);
         }
-
+        
         $.ajax({
-            url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.53502&lon=-87.38068&start=2015-11-01&end=2015-11-22&num=500",
-            headers: { "X-Mashape-Key": "QNVCYMTHZ0mshzFl0IBVoTRvjdLCp1kMFGVjsn51wd4liyvJWe", "Accept": "application/json" },
+            url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.897281&lon=-87.635102&start=2015-11-16&end=2015-11-16&num=500",
+            headers: { "X-Mashape-Key": "rSCiGbEc2amshYK4i3bGFu9ltLZWp1D9W11jsnoxBKLY0ixRyW", "Accept": "application/json" },
             type: "GET",
             success: function (data) {
                 crimes = JSON.parse(data)['items'];
-                console.log("This is crimes", crimes)
                 $.ajax({
-                    url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.53502&lon=-87.38068&start=2015-11-01&end=2015-11-22&num=500",
-                    headers: { "X-Mashape-Key": "QNVCYMTHZ0mshzFl0IBVoTRvjdLCp1kMFGVjsn51wd4liyvJWe", "Accept": "application/json" },
+                    url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.897281&lon=-87.635102&start=2015-11-17&end=2015-11-17&num=500",
+                    headers: { "X-Mashape-Key": "rSCiGbEc2amshYK4i3bGFu9ltLZWp1D9W11jsnoxBKLY0ixRyW", "Accept": "application/json" },
                     type: "GET",
                     success: function (data) {
                         newCrimes = JSON.parse(data)['items'];
                         for (var i = 0; i < newCrimes.length; i++){
                             crimes.push(newCrimes[i]);
                         }
+                        $.ajax({
+                            url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.897281&lon=-87.635102&start=2015-11-18&end=2015-11-18&num=500",
+                            headers: { "X-Mashape-Key": "rSCiGbEc2amshYK4i3bGFu9ltLZWp1D9W11jsnoxBKLY0ixRyW", "Accept": "application/json" },
+                            type: "GET",
+                            success: function (data) {
+                                newCrimes = JSON.parse(data)['items'];
+                                for (var i = 0; i < newCrimes.length; i++){
+                                    crimes.push(newCrimes[i]);
+                                }
+                                $.ajax({
+                                    url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.897281&lon=-87.635102&start=2015-11-19&end=2015-11-19&num=500",
+                                    headers: { "X-Mashape-Key": "rSCiGbEc2amshYK4i3bGFu9ltLZWp1D9W11jsnoxBKLY0ixRyW", "Accept": "application/json" },
+                                    type: "GET",
+                                    success: function (data) {
+                                        newCrimes = JSON.parse(data)['items'];
+                                        for (var i = 0; i < newCrimes.length; i++){
+                                            crimes.push(newCrimes[i]);
+                                        }
+                                        $.ajax({
+                                            url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.897281&lon=-87.635102&start=2015-11-20&end=2015-11-20&num=500",
+                                            headers: { "X-Mashape-Key": "rSCiGbEc2amshYK4i3bGFu9ltLZWp1D9W11jsnoxBKLY0ixRyW", "Accept": "application/json" },
+                                            type: "GET",
+                                            success: function (data) {
+                                                newCrimes = JSON.parse(data)['items'];
+                                                for (var i = 0; i < newCrimes.length; i++){
+                                                    crimes.push(newCrimes[i]);
+                                                }
+                                                $.ajax({
+                                                    url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.897281&lon=-87.635102&start=2015-11-21&end=2015-11-21&num=500",
+                                                    headers: { "X-Mashape-Key": "rSCiGbEc2amshYK4i3bGFu9ltLZWp1D9W11jsnoxBKLY0ixRyW", "Accept": "application/json" },
+                                                    type: "GET",
+                                                    success: function (data) {
+                                                        newCrimes = JSON.parse(data)['items'];
+                                                        for (var i = 0; i < newCrimes.length; i++){
+                                                            crimes.push(newCrimes[i]);
+                                                        }
+                                                        $.ajax({
+                                                            url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.897281&lon=-87.635102&start=2015-11-22&end=2015-11-22&num=500",
+                                                            headers: { "X-Mashape-Key": "rSCiGbEc2amshYK4i3bGFu9ltLZWp1D9W11jsnoxBKLY0ixRyW", "Accept": "application/json" },
+                                                            type: "GET",
+                                                            success: function (data) {
+                                                                newCrimes = JSON.parse(data)['items'];
+                                                                for (var i = 0; i < newCrimes.length; i++){
+                                                                    crimes.push(newCrimes[i]);
+                                                                }
+                                                                initMap();
+                                                                for (var i = 0; i < crimes.length; i += 100){
+                                                                    $.ajax({
+                                                                        method: "POST",
+                                                                        url: "/postingdata",
+                                                                        contentType: "application/json",
+                                                                        data: JSON.stringify(crimes.slice(i, i+100)),
+                                                                        success: function(){
+                                                                            console.log("Posting crime elements from index", i, "to", i+100);
+                                                                        }
+                                                                    })
+                                                                }
+                                                            }
+                                                        })
+                                                    }
+                                                })
+                                            }
+                                        })
+                                    }
+                                })
+                            }
+                        })     
                     }
                 })
             }  
