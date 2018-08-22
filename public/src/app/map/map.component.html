@@ -1,11 +1,11 @@
-﻿<button class="btn btn-secondary" (click)="getCrimes()">Get Crimes</button>
+<button class="btn btn-secondary" (click)="getCrimes()">Get Crimes</button>
 
 <app-search></app-search>
 <div id="map"></div>
 <div id="floating-panel">
-    <button class="btn btn-secondary" onclick="toggleHeatmap()">Toggle Heatmap</button>
-    <button class="btn btn-secondary" onclick="changeGradient()">Change gradient</button>
-    <button class="btn btn-secondary" onclick="changeRadius()">Change radius</button>
-    <button class="btn btn-secondary" onclick="changeOpacity()">Change opacity</button>
+    <button class="btn btn-secondary" (click)="toggleHeatmap()">Toggle Heatmap</button>
+    <button class="btn btn-secondary" (click)="changeGradient()">Change gradient</button>
+    <button class="btn btn-secondary" (click)="changeRadius()">Change radius</button>
+    <button class="btn btn-secondary" (click)="changeOpacity()">Change opacity</button>
 </div>
 

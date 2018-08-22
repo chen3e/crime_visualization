@@ -84,14 +84,14 @@
         }
 
         $.ajax({
-            url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.53502&lon=-87.38068&start=2015-03-02&end=2015-11-22&num=500",
+            url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.53502&lon=-87.38068&start=2015-11-01&end=2015-11-22&num=500",
             headers: { "X-Mashape-Key": "QNVCYMTHZ0mshzFl0IBVoTRvjdLCp1kMFGVjsn51wd4liyvJWe", "Accept": "application/json" },
             type: "GET",
             success: function (data) {
                 crimes = JSON.parse(data)['items'];
                 console.log("This is crimes", crimes)
                 $.ajax({
-                    url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.53502&lon=-87.38068&start=2015-03-03&end=2015-11-22&num=500",
+                    url: "https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.53502&lon=-87.38068&start=2015-11-01&end=2015-11-22&num=500",
                     headers: { "X-Mashape-Key": "QNVCYMTHZ0mshzFl0IBVoTRvjdLCp1kMFGVjsn51wd4liyvJWe", "Accept": "application/json" },
                     type: "GET",
                     success: function (data) {

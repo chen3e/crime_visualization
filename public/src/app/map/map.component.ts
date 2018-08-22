@@ -24,13 +24,13 @@ export class MapComponent implements OnInit {
 
     ngOnInit() {
         Cache = null;
-        this.getCrimes();
+        // this.getCrimes();
     }
 
     initMap() {
         this.map = new google.maps.Map(document.getElementById('map'), {
             center: this.chicago,
-            zoom: 16
+            zoom: 12
         });
         var markers = [];
         for (let i = 0; i < this.crimes.length; i++) {
@@ -69,11 +69,18 @@ export class MapComponent implements OnInit {
                 map: this.map,
                 title: markers[i].title
             });
-            google.maps.event.addListener(marker, 'click', (function (marker, infowindow) {
+            google.maps.event.addListener(marker, 'mouseover', (function (marker, infowindow) {
                 return function () {
+                    console.log(infowindow);
                     infowindow.open(this.map, marker);
                 }
-            })(marker, infowindow));
+          })(marker, infowindow));
+            google.maps.event.addListener(marker, 'mouseout', (function(marker, infowindow){
+              return function () {
+                console.log(infowindow);
+                infowindow.close(this.map, marker);
+              }
+            })(marker,infowindow));
             // marker.addListener("hover", function() {
             //     infowindow.open(map, marker);
             // })
