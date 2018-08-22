@@ -10,6 +10,16 @@ module.exports = function (app) {
         crimes.filterCrimes(req, res);
     })
 
+    app.post('/postingdata', (req, res) => {
+        crimes.makeCrimes(req, res);
+    })
+
+    // SANITY CHECK TO SEE IF CRIMES EXIST ON ANY GIVEN DAY- EDIT CRIMES.JS TO CHANGE THE DAY
+    app.get("/findCrimeForMe", (req, res) => {
+       console.log("in findcrimeforme");
+       crimes.findCrimeForMe(req, res);
+    })
+
     app.all("*", (req, res, next) => {
         res.sendFile(path.resolve("./public/dist/public/index.html"))
     });

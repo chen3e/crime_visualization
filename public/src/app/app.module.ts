@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { MapComponent } from './map/map.component';
 import { SearchComponent } from './search/search.component';
 import { DataComponent } from './data/data.component';
+import { GraphComponent } from './graph/graph.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     SearchComponent,
-    DataComponent
+    DataComponent,
+    GraphComponent
   ],
   imports: [
     BrowserModule,
