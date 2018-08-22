@@ -24,7 +24,7 @@ export class MapComponent implements OnInit {
 
     ngOnInit() {
         Cache = null;
-        this.getCrimes();
+        // this.getCrimes();
     }
 
     initMap() {
