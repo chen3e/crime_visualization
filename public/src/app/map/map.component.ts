@@ -10,12 +10,7 @@ declare var google: any;
     styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-    crimes: [{
-        catname: String,
-        latitude: Number,
-        longitude: Number,
-        description: any
-    }];
+    crimes: any;
     map: any;
     heatmap: any;
     chicago = { lat: 41.8974, lng: -87.6352 };
@@ -24,7 +19,7 @@ export class MapComponent implements OnInit {
 
     ngOnInit() {
         Cache = null;
-        // this.getCrimes();
+        this.getCrimes();
     }
 
     initMap() {
@@ -133,7 +128,7 @@ export class MapComponent implements OnInit {
         observable.subscribe(data => {
             console.log(data);
             console.log("Crimes:")
-            this.crimes = JSON.parse(data["data"])['items'];
+            this.crimes = data['data'];
             console.log(this.crimes);
             this.initMap();
         })

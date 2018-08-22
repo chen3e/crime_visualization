@@ -1,11 +1,9 @@
 const unirest = require('unirest');
-const io = require('socket.io');
-const server = require("../../server");
-console.log(server);
+const mongoose = require("mongoose");
+Crime = mongoose.model("Crime");
 
 module.exports = {
     getCrimes: function(req, res, io) {
-<<<<<<< HEAD
         // // These code snippets use an open-source library. http://unirest.io/nodejs
         // unirest.get("https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.881&lon=-87.623&num=500&start=2015-11-22&end=2015-11-22")
         // // Put api key here
@@ -16,19 +14,12 @@ module.exports = {
         //     // io.emit("crime_data", { message: "Success!", data: result.body })
         //     return res.json({ message: "Success!", data: result.body });
         // });
-        
-=======
-        // These code snippets use an open-source library. http://unirest.io/nodejs
-        unirest.get("https://yourmapper2.p.mashape.com/markers?center=0&f=json&id=182&lat=41.881&lon=-87.623&num=500&start=2015-11-22&end=2015-11-22")
-        // Put api key here
-        .header("X-Mashape-Key", "b9cHBlr2PUmsh98hyrF30fUgJhNFp1d4QMFjsng2zNpmyY0H0C")
-        .header("Accept", "application/json")
-        .end(function (result) {
-            console.log(result.status, result.headers);
-            // io.emit("crime_data", { message: "Success!", data: result.body })
-            return res.json({ message: "Success!", data: result.body });
-        });
->>>>>>> 5222692389b5ffbad4f0a0888f54187844edf1f5
+        Crime.find({}, function(err, data) {
+            if (err) {
+                console.log(err);
+            }
+            return res.json({ message: "Success!", data: data });
+        })
     },
 
     filterCrimes: function(req, res) {
