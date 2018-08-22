@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
 import { } from '@types/googlemaps';
-import { url } from 'inspector';
 
 declare var google: any;
 
