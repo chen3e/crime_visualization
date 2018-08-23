@@ -1,5 +1,5 @@
 * {
-  border: 2px solid blue;
+  /*border: 2px solid blue;*/
 }
 
 .graphs {
@@ -7,4 +7,22 @@
   height: 500px;
   border: 3px solid pink;
   vertical-align: top;
+}
+
+#searchBar {
+  width: 30%;
+  position: absolute;
+  right: 0;
+  border-radius: 10px;
+  border: 2px solid gray;
+  padding: 1%;
+  background: rgba(255, 255, 255, 0.75);
+  margin-top: 48px;
+  z-index: 1000;
+}
+
+#showSearch {
+  position: absolute;
+  right: 1%;
+  margin-top: 5px;
 }
