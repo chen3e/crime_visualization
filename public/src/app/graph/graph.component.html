@@ -1,3 +1,70 @@
+<button class="btn btn-secondary" id="showSearch">Filter Results</button>
+<div class="container" id="searchBar">
+  <h2>Search for Crimes</h2>
+  <form id="searchForm" (submit)="filterCrimes()">
+    <div class="form-group">
+      <label>Keyword:</label>
+      <input id="keyword" class="form-control" type="type" name="keyword" [(ngModel)]="searchParams.keyword">
+    </div>
+    <div class="form-group">
+      <label>Crime type:</label>
+      <select id="categoryid" multiple="multiple" class="form-control" name="categoryid" [(ngModel)]="searchParams.categoryid">
+        <option value="1">Battery</option>
+        <option value="2">Assault</option>
+        <option value="3">Motor Vehicle Theft</option>
+        <option value="4">Theft</option>
+        <option value="5">Criminal Damage</option>
+        <option value="6">Burglary</option>
+        <option value="8">Robbery</option>
+        <option value="21">Stalking</option>
+        <option value="7">Sex Offense</option>
+        <option value="10">Sexual Assault</option>
+        <option value="11">Deceptive Practice</option>
+        <option value="12">Weapons Violation</option>
+        <option value="13">Narcotics</option>
+        <option value="14">Prostitution</option>
+        <option value="15">Arson</option>
+        <option value="16">Homicide</option>
+        <option value="17">Gambling</option>
+        <option value="18">Kidnapping</option>
+        <option value="19">Obscenity</option>
+        <option value="20">Intimidation</option>
+        <option value="9">Miscellaneous</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Region:</label>
+      <select class="form-control" name="region" [(ngModel)]="searchParams.region">
+        <option value="farNorthSide">Far North Side</option>
+        <option value="northwestSide">Northwest Side</option>
+        <option value="northSide">North Side</option>
+        <option value="westSide">West Side</option>
+        <option value="central">Central</option>
+        <option value="southSide">South Side</option>
+        <option value="southwestSide">Southwest Side</option>
+        <option value="farSouthwestSide">Far Southwest Side</option>
+        <option value="farSoutheastSide">Far Southeast Side</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Date:</label>
+      <div class="row form-row">
+        <input id="date" class="form-control" type="date" name="date" [(ngModel)]="searchParams.date">
+      </div>
+    </div>
+    <!-- The API we're using does have time data, however every crime apparently happened at 12AM, soooo.... -->
+    <!-- <div class="form-group">
+        <label>Time:</label>
+        <div class="row form-row">
+            <input class="form-control col-sm-3" type="time" name="startTime" [(ngModel)]="searchParams.start_time">
+            <p class="col-sm-1">to</p>
+            <input class="form-control col-sm-3" type="time" name="endTime" [(ngModel)]="searchParams.end_time">
+        </div>
+    </div> -->
+    <input class="btn btn-success" type="submit" value="Search">
+  </form>
+</div>
+
 <div class="graphs">
   <canvas id="lineChart"></canvas>
   <canvas id="chart2"></canvas>
