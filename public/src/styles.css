@@ -2,5 +2,13 @@
 @import "https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css";
 
 body {
-    background-color: #ddecfa;
+    background-color: #347bc9;
+    background-image: url("assets/img/chicago.jpg");
+    background-size: cover;
+    background-position: 0 34vh;
+    background-repeat: no-repeat; 
+}
+
+.error {
+    color: red;
 }

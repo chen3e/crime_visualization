@@ -10,6 +10,8 @@ import { MapComponent } from './map/map.component';
 import { SearchComponent } from './search/search.component';
 import { DataComponent } from './data/data.component';
 import { GraphComponent } from './graph/graph.component';
+import { ReportComponent } from './report/report.component';
+import { DataSearchComponent } from './data-search/data-search.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { GraphComponent } from './graph/graph.component';
     MapComponent,
     SearchComponent,
     DataComponent,
-    GraphComponent
+    GraphComponent,
+    ReportComponent,
+    DataSearchComponent
   ],
   imports: [
     BrowserModule,
