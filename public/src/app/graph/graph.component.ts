@@ -14,7 +14,9 @@ export class GraphComponent implements OnInit {
     pie: Boolean;
     graph1 = [];
     searchParams: any;
+    // crimeLabels are the type of crime, stored as an array so they can be displayed on the chart. Array size is variable
     crimeLabels = [];
+    // crimeDict contains 21 values, and we used this to grab and store/compare data.
     crimeDict = {
         "1": "Battery",
         "2": "Assault",
@@ -37,17 +39,20 @@ export class GraphComponent implements OnInit {
         "19": "Obscenity",
         "20": "Intimidation",
         "21": "Stalking"
-    }
+  }
+    // colors is a fixed array of length 21, containing 21 rgb color values.  Feel free to change these.
     colors = [
         'rgb(255,153,153)', 'rgb(255,204,153)', 'rgb(255,255,153)', 'rgb(204,255,153)', 'rgb(153,255,153)', 'rgb(153,255,204)', 'rgb(153,255,255)', 'rgb(153,204,255)', 'rgb(153,153,255)', 'rgb(204,153,255)', 'rgb(255,153,255)', 'rgb(255,153,204)', 'rgb(255,0,0)', 'rgb(255,128,0)', 'rgb(255,255,0)', 'rgb(0,255,0)', 'rgb(0,255,128)', 'rgb(0,255,255)', 'rgb(0,128,255)', 'rgb(0,0,255)', 'rgb(127,0,255)'
-    ];
-    dataColors = [];
+  ];
+    // This is the array that gets passed to the chart. Variable size, so it needs to be reset every time.
+    dataColors = [];  
     precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     dataCrimeArray = [];
     crimeData = [];
     crimes: any;
     showSearch: Boolean;
     searchMessage = "Filter Results";
+    myPieChart: any;
     constructor(private _httpService: HttpService) { }
     ngOnInit() {
         this.initChart();
@@ -153,8 +158,13 @@ export class GraphComponent implements OnInit {
     //  })
     //}
     filterCrimes() {
-        this.searchParams = {};
+        console.log(this.searchParams);
         console.log("In filter");
+        this.crimeLabels = [];
+        this.precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        this.dataCrimeArray = [];
+        this.dataColors = [];
+        this.crimeData = [];
         let observable = this._httpService.filterCrimes(this.searchParams);
         observable.subscribe(data => {
             console.log(data);
@@ -162,9 +172,55 @@ export class GraphComponent implements OnInit {
             this.crimes = data["data"];
             console.log("Here are some graph crimes");
             console.log(this.crimes);
-        })
+            for (var i = 0; i < data['data'].length; i++) {
+              //console.log(data['data'][i]);
+              //console.log('this is the category id', data['data'][i]['categoryid']);
+              //console.log('this is the dict data of that id', this.crimeDict[data['data'][i]['categoryid']]);
+              //console.log(this.crimeLabels[data['data'][i]['categoryid']]);
+              this.precrimeLabels[data['data'][i]['categoryid']]++;
+              //console.log(this.crimeLabels);
+            }
+            for (var j = 1; j < this.precrimeLabels.length; j++) {
+              this.dataCrimeArray.push(this.precrimeLabels[j]);
+            }
+            let sum = 0;
+            for (var k = 0; k < this.dataCrimeArray.length; k++) {
+              if (this.dataCrimeArray[k] != 0) {
+                this.crimeLabels.push(this.crimeDict[k + 1]);
+                this.crimeData.push(this.dataCrimeArray[k]);
+                this.dataColors.push(this.colors[k]);
+                sum += this.dataCrimeArray[k];
+              }
+            }
+            for (var l = 0; l < this.crimeData.length; l++) {
+              this.crimeData[l] = this.crimeData[l] / sum * 100;
+              this.crimeData[l] = this.crimeData[l].toFixed(2);
+            }
+            console.log(this.dataCrimeArray);
+            console.log(this.crimeLabels);
+            console.log("Here are some graph crimes");
+            console.log(this.crimes);
+            data = [{ data: this.crimeData }];
+            this.removePie(this.myPieChart);
+            this.addPie(this.myPieChart, this.crimeLabels, this.crimeData);
+          })
     }
-
+    addPie(chart, label, data){
+      console.log(chart.data);
+      chart.data.labels = label;
+      chart.data.datasets[0].data = data;
+      chart.update();
+      console.log(chart.data);
+  }
+    removePie(chart){
+      console.log(chart.data);
+      chart.data.labels = [];
+      chart.data.datasets.forEach((dataset) => {
+        dataset.data = {};
+      });
+      chart.update();
+      console.log(chart.data);
+}
     pastWeek() {
         this.searchParams = {
             start_date: "2015-11-15",
@@ -261,7 +317,7 @@ export class GraphComponent implements OnInit {
     console.log(this.colors);
     var canvas = <HTMLCanvasElement>document.getElementById('pieChart');
     var ctx = canvas.getContext('2d');
-    var myPieChart = new Chart(ctx, {
+    this.myPieChart = new Chart(ctx, {
       type: 'pie',
       data: {
         datasets: [{
@@ -281,7 +337,12 @@ export class GraphComponent implements OnInit {
     this.getAllCrimes();
   }
   getAllCrimes() {
-    console.log("In filter");
+    console.log("Getting all crimes");
+    this.crimeLabels = [];
+    this.precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.dataCrimeArray = [];
+    this.dataColors = [];
+    this.crimeData = [];
     let observable = this._httpService.filterCrimes({});
     observable.subscribe(data => {
       console.log("Here were the entered search params");
