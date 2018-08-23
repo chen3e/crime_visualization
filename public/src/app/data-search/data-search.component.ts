@@ -34,6 +34,8 @@ export class DataSearchComponent implements OnInit {
             console.log(this._data.crimes);
         })
     }
+    
+    
 
     show() {
         if (!this.showSearch) {
