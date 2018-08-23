@@ -2,11 +2,46 @@
   /*border: 2px solid blue;*/
 }
 
+#info {
+    display: inline-block;
+    vertical-align: top;
+    width: 25%;
+    color: white;
+    padding: 2%;
+    height: 80vh;
+}
+
 .graphs {
-  width: 500px;
-  height: 500px;
-  border: 3px solid pink;
-  vertical-align: top;
+    width: 75%;
+    height: 82vh;
+    vertical-align: top;
+    display: inline-block;
+    margin-top: 1vh;
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+.graphs h2 {
+    text-align: center;
+    margin: 2% 0;
+}
+
+.carousel-control-prev, .carousel-control-next {
+    width: 10%;
+}
+
+.graph {
+    width: 85%;
+    margin: 3% auto;
+}
+
+.floating-panel {
+    margin-top: 4%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.floating-panel * {
+    margin: 0 auto;
 }
 
 #searchBar {
