@@ -44,6 +44,17 @@ module.exports = {
             console.log(data);
             return res.json({ message: "Success!", data: data });
         })
+    },
+
+    reportCrime: function(req, res) {
+        Crime.create(req.body, function(err, data) {
+            if (err) {
+                return res.json({message: "Error!", errors: err});
+            }
+            else {
+                return res.json({message: "Success!", data: data});
+            }
+        })
     }
 }
 

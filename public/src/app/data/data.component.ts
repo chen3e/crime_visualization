@@ -29,7 +29,7 @@ export class DataComponent implements OnInit {
     observable.subscribe(data => {
       console.log(data);
       console.log("Crimes:")
-      this.crimes = JSON.parse(data["data"])['items'];
+      this.crimes = data["data"];
       console.log(this.crimes);
       for (let i = 0; i < this.crimes.length; i++) {
         this.crimes[i].description = this.crimes[i].description.split('BR&gt;');

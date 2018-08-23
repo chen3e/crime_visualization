@@ -10,6 +10,10 @@ module.exports = function (app) {
         crimes.filterCrimes(req, res);
     })
 
+    app.post("/reportCrime", function(req, res) {
+        crimes.reportCrime(req, res);
+    })
+
     app.post('/postingdata', (req, res) => {
         crimes.makeCrimes(req, res);
     })
