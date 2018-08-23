@@ -14,7 +14,9 @@ export class GraphComponent implements OnInit {
     pie: Boolean;
     graph1 = [];
     searchParams: any;
+    // crimeLabels are the type of crime, stored as an array so they can be displayed on the chart. Array size is variable
     crimeLabels = [];
+    // crimeDict contains 21 values, and we used this to grab and store/compare data.
     crimeDict = {
         "1": "Battery",
         "2": "Assault",
@@ -37,11 +39,13 @@ export class GraphComponent implements OnInit {
         "19": "Obscenity",
         "20": "Intimidation",
         "21": "Stalking"
-    }
+  }
+    // colors is a fixed array of length 21, containing 21 rgb color values.  Feel free to change these.
     colors = [
         'rgb(255,153,153)', 'rgb(255,204,153)', 'rgb(255,255,153)', 'rgb(204,255,153)', 'rgb(153,255,153)', 'rgb(153,255,204)', 'rgb(153,255,255)', 'rgb(153,204,255)', 'rgb(153,153,255)', 'rgb(204,153,255)', 'rgb(255,153,255)', 'rgb(255,153,204)', 'rgb(255,0,0)', 'rgb(255,128,0)', 'rgb(255,255,0)', 'rgb(0,255,0)', 'rgb(0,255,128)', 'rgb(0,255,255)', 'rgb(0,128,255)', 'rgb(0,0,255)', 'rgb(127,0,255)'
-    ];
-    dataColors = [];
+  ];
+    // This is the array that gets passed to the chart. Variable size, so it needs to be reset every time.
+    dataColors = [];  
     precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     dataCrimeArray = [];
     crimeData = [];
@@ -169,6 +173,7 @@ export class GraphComponent implements OnInit {
             this.crimes = data["data"];
             console.log("Here are some graph crimes");
             console.log(this.crimes);
+          
             for (var i = 0; i < this.crimes.length; i++) {
                 //console.log(this.crimes[i]);
                 //console.log('this is the category id', this.crimes[i]['categoryid']);
@@ -218,7 +223,7 @@ export class GraphComponent implements OnInit {
         });
         chart.update();
     }
-
+  
     pastWeek() {
         this.searchParams = {};
         this.searchParams = {
@@ -317,9 +322,66 @@ export class GraphComponent implements OnInit {
         };
         this.filterCrimes();
     }
-    makePieChart() {
-        if (canvas) {
-            console.log('it exisits');
+  makePieChart() {
+    if (canvas) {
+      console.log('it exisits');
+    }
+    console.log("making pie");
+    console.log(this.crimeLabels);
+    console.log(this.crimeData);
+    console.log(this.colors);
+    var canvas = <HTMLCanvasElement>document.getElementById('pieChart');
+    var ctx = canvas.getContext('2d');
+    this.myPieChart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        datasets: [{
+          data: this.crimeData,
+          backgroundColor: this.dataColors,
+          borderWidth: 0
+          
+        }],
+        labels: this.crimeLabels
+      },
+      options: {
+      }
+    })
+  }
+  initPieChart() {
+    console.log("Initializing pie chart with all data");
+    this.getAllCrimes();
+  }
+  getAllCrimes() {
+    console.log("Getting all crimes");
+    this.crimeLabels = [];
+    this.precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.dataCrimeArray = [];
+    this.dataColors = [];
+    this.crimeData = [];
+    let observable = this._httpService.filterCrimes({});
+    observable.subscribe(data => {
+      console.log("Here were the entered search params");
+      console.log(this.searchParams);
+      this.crimes = data["data"];
+      
+      for (var i = 0; i < data['data'].length; i++) {
+        //console.log(data['data'][i]);
+        //console.log('this is the category id', data['data'][i]['categoryid']);
+        //console.log('this is the dict data of that id', this.crimeDict[data['data'][i]['categoryid']]);
+        //console.log(this.crimeLabels[data['data'][i]['categoryid']]);
+        this.precrimeLabels[data['data'][i]['categoryid']]++;
+        //console.log(this.crimeLabels);
+      }
+      for (var j = 1; j < this.precrimeLabels.length; j++) {
+        this.dataCrimeArray.push(this.precrimeLabels[j]);
+      }
+      let sum = 0;
+      for (var k = 0; k < this.dataCrimeArray.length; k++) {
+        if (this.dataCrimeArray[k] != 0) {
+          this.crimeLabels.push(this.crimeDict[k + 1]);
+          this.crimeData.push(this.dataCrimeArray[k]);
+          this.dataColors.push(this.colors[k]);
+          sum += this.dataCrimeArray[k];
         }
         console.log("making pie");
         console.log(this.crimeLabels);
