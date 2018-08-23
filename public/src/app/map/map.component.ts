@@ -45,14 +45,25 @@ export class MapComponent implements OnInit {
                     description[this.crimes[i].description[j][0]] = true;
                 }
             }
-            this.crimes[i].description = description;
-            let content = `<div id="content">` +
+            let content = "";
+            if (description['Location']) {
+                this.crimes[i].description = description;
+                content += `<div id="content">` +
+                    `<div id="siteNotice">` +
+                    "</div>" +
+                    `<h2 id="firstHeading" class="firstHeading">${this.crimes[i].catname}</h2>` +
+                    `<div id="bodyContent">` +
+                    `<p>location: ${this.crimes[i].description.Location.toLowerCase()}</p>` +
+                    `<p>details: ${this.crimes[i].description.Details.toLowerCase()}</p>`;
+            }
+            else {
+                content += `<div id="content">` +
                 `<div id="siteNotice">` +
                 "</div>" +
                 `<h2 id="firstHeading" class="firstHeading">${this.crimes[i].catname}</h2>` +
                 `<div id="bodyContent">` +
-                `<p>location: ${this.crimes[i].description.Location.toLowerCase()}</p>` +
-                `<p>details: ${this.crimes[i].description.Details.toLowerCase()}</p>`;
+                `<p>details: ${this.crimes[i].description}</p>`;
+            }
             markers.push({ position: new google.maps.LatLng(Number(this.crimes[i].latitude), Number(this.crimes[i].longitude)), map: this.map, title: this.crimes[i].catname, content: content });
         }
         for (let i = 0; i < markers.length; i++) {

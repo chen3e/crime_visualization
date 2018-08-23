@@ -1,14 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import { MapComponent } from '../map/map.component';
-
+import { DataComponent } from '../data/data.component';
 
 @Component({
-    selector: 'app-search',
-    templateUrl: './search.component.html',
-    styleUrls: ['./search.component.css']
+    selector: 'app-dataSearch',
+    templateUrl: './data-search.component.html',
+    styleUrls: ['./data-search.component.css']
 })
-export class SearchComponent implements OnInit {
+export class DataSearchComponent implements OnInit {
     searchParams = {
         keyword: null,
         categoryid : null,
@@ -18,7 +17,7 @@ export class SearchComponent implements OnInit {
     showSearch: Boolean;
     searchMessage = "Filter Results";
 
-    constructor(private _httpService: HttpService, private _map: MapComponent) { }
+    constructor(private _httpService: HttpService, private _data: DataComponent) { }
 
     ngOnInit() {
         this.showSearch = false;
@@ -29,9 +28,8 @@ export class SearchComponent implements OnInit {
         observable.subscribe(data => {
             console.log(data);
             console.log("Crimes:")
-            this._map.crimes = data["data"];
-            console.log(this._map.crimes);
-            this._map.initMap();
+            this._data.crimes = data["data"];
+            console.log(this._data.crimes);
         })
     }
 

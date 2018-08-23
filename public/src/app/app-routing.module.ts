@@ -5,6 +5,8 @@ import { MapComponent } from './map/map.component';
 import { SearchComponent } from './search/search.component';
 import { DataComponent } from './data/data.component';
 import { GraphComponent } from './graph/graph.component';
+import { ReportComponent } from './report/report.component';
+import { DataSearchComponent } from './data-search/data-search.component';
 
 const routes: Routes = [
     {
@@ -15,13 +17,17 @@ const routes: Routes = [
         ]
     },
     {
-        path: "data", component: DataComponent
+        path: "data", component: DataComponent, children: [
+            {
+                path: "", component: DataSearchComponent
+            },
+        ]
     },
     {
-        path:'graph', component:GraphComponent
+        path:'graph', component: GraphComponent
     },
     {
-        path:'map', component: MapComponent
+        path: 'report', component: ReportComponent
     }
 ];
 
