@@ -12,7 +12,8 @@ export class DataSearchComponent implements OnInit {
         keyword: null,
         categoryid : null,
         region: null,
-        date: null
+        start_date: null,
+        end_date: null
     };
     showSearch: Boolean;
     searchMessage = "Filter Results";
@@ -24,6 +25,7 @@ export class DataSearchComponent implements OnInit {
     }
 
     filterCrimes() {
+        console.log("filtering")
         let observable = this._httpService.filterCrimes(this.searchParams);
         observable.subscribe(data => {
             console.log(data);

@@ -47,9 +47,11 @@
             </select>
         </div>
         <div class="form-group">
-            <label>Date:</label>
+            <label>Date Range:</label>
             <div class="row form-row">
-                <input id="date" class="form-control" type="date" name="date" [(ngModel)]="searchParams.date">
+                <input id="date" class="form-control col-sm-5" type="date" name="date" [(ngModel)]="searchParams.start_date">
+                <p class="col-sm-1">to</p>
+                <input id="date" class="form-control col-sm-5" type="date" name="date" [(ngModel)]="searchParams.end_date">
             </div>
         </div>
         <!-- The API we're using does have time data, however every crime apparently happened at 12AM, soooo.... -->
