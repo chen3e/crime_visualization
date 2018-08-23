@@ -126,6 +126,7 @@ export class GraphComponent implements OnInit {
     console.log("making pie");
     console.log(this.crimeLabels);
     console.log(this.crimeData);
+    console.log(this.colors);
     var canvas = <HTMLCanvasElement>document.getElementById('pieChart');
     var ctx = canvas.getContext('2d');
     var myPieChart = new Chart(ctx, {
@@ -146,7 +147,6 @@ export class GraphComponent implements OnInit {
   initPieChart() {
     console.log("Initializing pie chart with all data");
     this.getAllCrimes();
-    this.makePieChart();
   }
   getAllCrimes() {
     console.log("In filter");
@@ -167,12 +167,18 @@ export class GraphComponent implements OnInit {
       for (var j = 1; j < this.precrimeLabels.length; j++) {
         this.dataCrimeArray.push(this.precrimeLabels[j]);
       }
+      let sum = 0;
       for (var k = 0; k < this.dataCrimeArray.length; k++) {
         if (this.dataCrimeArray[k] != 0) {
           this.crimeLabels.push(this.crimeDict[k + 1]);
           this.crimeData.push(this.dataCrimeArray[k]);
           this.dataColors.push(this.colors[k]);
+          sum += this.dataCrimeArray[k];
         }
+      }
+      for (var l = 0; l < this.crimeData.length; l++) {
+        this.crimeData[l] = this.crimeData[l] / sum * 100;
+        this.crimeData[l] = this.crimeData[l].toFixed(2);
       }
       console.log(this.dataCrimeArray);
       console.log(this.crimeLabels);

@@ -71,7 +71,7 @@
         <a class="btn btn-danger" [routerLink]='["report"]'>Report a crime</a>
     </div>
 
-<div id="carouselExampleControls" class="carousel slide graphs" style="height:500px;" data-interval="false">
+<div id="carouselExampleControls" class="carousel slide graphs" data-interval="false">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <h2>Crime over Time</h2>
@@ -87,7 +87,7 @@
         <div class="carousel-item">
             <h2>Crime by Type</h2>
             <div class="graph">
-                <canvas id="pieChart"></canvas>
+                <canvas id="pieChart" height="160"></canvas>
                 <div class="floating-panel">
                     <button class="btn btn-secondary" (click)="farNorthSide()">Far North Side</button>
                     <button class="btn btn-secondary" (click)="northwestSide()">Northwest Side</button>
