@@ -13,7 +13,8 @@ export class SearchComponent implements OnInit {
         keyword: null,
         categoryid : null,
         region: null,
-        date: null
+        start_date: null,
+        end_date: null
     };
     showSearch: Boolean;
     searchMessage = "Filter Results";
@@ -25,6 +26,7 @@ export class SearchComponent implements OnInit {
     }
 
     filterCrimes() {
+        console.log("This is searchParams in component/service:", this.searchParams);
         let observable = this._httpService.filterCrimes(this.searchParams);
         observable.subscribe(data => {
             console.log(data);

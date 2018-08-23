@@ -1,0 +1,10 @@
+.tableDiv {
+    max-height: 86vh;
+    overflow: auto;
+    position: relative;
+    top: 6vh;
+}
+
+tbody {
+    background-color: rgba(255, 255, 255, 0.6);
+}

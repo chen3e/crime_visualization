@@ -32,16 +32,83 @@ module.exports = {
         }
         console.log(searchParams['categoryid']);
         if (searchParams['categoryid']) {
-            searchParams['categoryid'] = {$in: searchParams['categoryid']}
+            searchParams['categoryid'] = {$in: searchParams['categoryid']};
+        }
+
+        if (searchParams['keyword']) {
+            searchParams['description'] = { "$regex": searchParams['keyword'], "$options": "i" };
+            delete searchParams['keyword'];
+        }
+
+        if (searchParams['start_date'] && searchParams['end_date']) {
+            searchParams['date'] = {"$gte": searchParams['start_date'], "$lte": searchParams['end_date']};
+            delete searchParams['start_date'];
+            delete searchParams['end_date'];
+        }
+        else if (searchParams['start_date']) {
+            searchParams['date'] = {"$gte": searchParams['start_date']};
+            delete searchParams['start_date'];
+        }
+        else if (searchParams['end_date']) {
+            searchParams['date'] = {"$lte": searchParams['end_date']};
+            delete searchParams['end_date'];
         }
         
-        console.log(searchParams);
+
+        // Crime.find( { latitude: { $gte: 41.454236 } } )
+
+        if (searchParams['region'] == 'farNorthSide') {
+            console.log("Looking on the far north side!");
+            searchParams['latitude'] = { "$gte": 41.954236 }
+            delete searchParams['region'];
+        }
+        else if (searchParams['region'] == 'northwestSide') {
+            console.log("Looking on the northwest side!");
+            searchParams['$and'] = [ { 'latitude': { $gte: 41.910516 } }, { 'latitude': { $lte: 41.954236} }, { 'longitude': { $gte: -87.727330 } } ];
+            delete searchParams['region'];
+        }
+        else if (searchParams['region'] == 'northSide') {
+            console.log("Looking on the north side!");
+            searchParams['$and'] = [ { 'latitude': { $gte: 41.910516 } }, { 'latitude': { $lte: 41.954236} }, { 'longitude': { $lte: -87.727330 } } ];
+            delete searchParams['region'];
+        }
+        else if (searchParams['region'] == 'westSide') {
+            console.log("Looking on the west side!");
+            searchParams['$and'] = [ { 'latitude': { $gte: 41.837104 } }, { 'latitude': { $lte: 41.910516} }, { 'longitude': { $gte: -87.636750 } } ];
+            delete searchParams['region'];
+        }
+        else if (searchParams['region'] == 'central') {
+            console.log("Looking in central!");
+            searchParams['$and'] = [ { 'latitude': { $gte: 41.852363 } }, { 'latitude': { $lte: 41.910516} }, { 'longitude': { $lte: -87.636750 } } ];
+            delete searchParams['region'];
+        }
+        else if (searchParams['region'] == 'southSide') {
+            console.log("Looking on the south side!");
+            searchParams['$and'] = [ { 'latitude': { $gte: 41.751754 } }, { 'latitude': { $lte: 41.852363} }, { 'longitude': { $lte: -87.636750 } } ];
+            delete searchParams['region'];
+        }
+        else if (searchParams['region'] == 'southwestSide') {
+            console.log("Looking on the southwest side!");
+            searchParams['$and'] = [ { 'latitude': { $gte: 41.751754 } }, { 'latitude': { $lte: 41.837104} }, { 'longitude': { $gte: -87.636750 } } ];
+            delete searchParams['region'];
+        }
+        else if (searchParams['region'] == 'farSouthwestSide') {
+            console.log("Looking on the far southwest side!");
+            searchParams['$and'] = [ { 'latitude': { $lte: 41.751754 } }, { 'longitude': { $gte: -87.634215 } } ];
+            delete searchParams['region'];
+        }
+        else if (searchParams['region'] == 'farSoutheastSide') {
+            console.log("Looking on the far southeast side!");
+            searchParams['$and'] = [ { 'latitude': { $lte: 41.751754 } }, { 'longitude': { $lte: -87.634215 } } ];
+            delete searchParams['region'];
+        }
+        console.log("This is searchParams in crimes.js", searchParams);
 
         Crime.find(searchParams, function(err, data) {
             if (err) {
                 console.log(err);
             }
-            console.log(data);
+            //console.log(data);
             return res.json({ message: "Success!", data: data });
         })
     },

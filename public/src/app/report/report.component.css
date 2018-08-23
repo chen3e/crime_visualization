@@ -1,7 +1,8 @@
 #report {
     background-color: rgba(255, 255, 255, 0.5);
     margin-top: 5vh;
-    padding: 2%;
+    padding: 2% 4%;
+    border-radius: 20px;
 }
 
 .warning {

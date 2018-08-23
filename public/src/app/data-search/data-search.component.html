@@ -32,7 +32,7 @@
                 <option value="9">Miscellaneous</option>
             </select>
         </div>
-        <div class="form-group">
+<!--         <div class="form-group">
             <label>Region:</label>
             <select class="form-control" name="region" [(ngModel)]="searchParams.region">
                 <option value="farNorthSide">Far North Side</option>
@@ -45,11 +45,27 @@
                 <option value="farSouthwestSide">Far Southwest Side</option>
                 <option value="farSoutheastSide">Far Southeast Side</option>
             </select>
-        </div>
+        </div> -->
         <div class="form-group">
-            <label>Date:</label>
+                <label>Region:</label>
+                <select class="form-control" name="region" [(ngModel)]="searchParams.region">
+                    <option value="{ latitude: { $gte: 41.954236 } }">Far North Side</option>
+                    <option value="northwestSide">Northwest Side</option>
+                    <option value="northSide">North Side</option>
+                    <option value="westSide">West Side</option>
+                    <option value="central">Central</option>
+                    <option value="southSide">South Side</option>
+                    <option value="southwestSide">Southwest Side</option>
+                    <option value="farSouthwestSide">Far Southwest Side</option>
+                    <option value="farSoutheastSide">Far Southeast Side</option>
+                </select>
+            </div>
+        <div class="form-group">
+            <label>Date Range:</label>
             <div class="row form-row">
-                <input id="date" class="form-control" type="date" name="date" [(ngModel)]="searchParams.date">
+                <input id="date" class="form-control col-sm-5" type="date" name="date" [(ngModel)]="searchParams.start_date">
+                <p class="col-sm-1">to</p>
+                <input id="date" class="form-control col-sm-5" type="date" name="date" [(ngModel)]="searchParams.end_date">
             </div>
         </div>
         <!-- The API we're using does have time data, however every crime apparently happened at 12AM, soooo.... -->
