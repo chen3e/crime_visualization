@@ -13,7 +13,8 @@
 
 .graphs {
     width: 75%;
-    height: 82vh;
+    padding: 2% 0;
+    height: auto;
     vertical-align: top;
     display: inline-block;
     margin-top: 1vh;
@@ -30,18 +31,22 @@
 }
 
 .graph {
-    width: 85%;
-    margin: 3% auto;
+    width: 75%;
+    margin: 1% auto;
 }
 
 .floating-panel {
-    margin-top: 4%;
+    margin-top: 1%;
     display: flex;
     justify-content: space-between;
 }
 
 .floating-panel * {
     margin: 0 auto;
+}
+
+.arrow {
+    width: 50px;
 }
 
 #searchBar {

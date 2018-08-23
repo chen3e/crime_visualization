@@ -77,39 +77,37 @@
             <h2>Crime over Time</h2>
             <div class="graph">
                 <canvas id="lineChart"></canvas>
-                <div class="floating-panel">
-                    <button class="btn btn-secondary" (click)="pastWeek()">Past Week</button>
-                    <button class="btn btn-secondary" (click)="pastMonth()">Past Month</button>
-                    <button class="btn btn-secondary" (click)="pastYear()">Past Year</button>
-                </div>
+            </div>
+            <div class="floating-panel">
+                <button class="btn btn-secondary" (click)="pastWeek()">Past Week</button>
+                <button class="btn btn-secondary" (click)="pastMonth()">Past Month</button>
+                <button class="btn btn-secondary" (click)="pastYear()">Past Year</button>
             </div>
         </div>
         <div class="carousel-item">
             <h2>Crime by Type</h2>
             <div class="graph">
                 <canvas id="chart2"></canvas>
-                <div class="floating-panel">
-                    <button class="btn btn-secondary" (click)="farNorthSide()">Far North Side</button>
-                    <button class="btn btn-secondary" (click)="northwestSide()">Northwest Side</button>
-                    <button class="btn btn-secondary" (click)="northSide()">North Side</button>
-                    <button class="btn btn-secondary" (click)="westSide()">West Side</button>
-                    <button class="btn btn-secondary" (click)="central()">Central</button>
-                </div>
-                <div class="floating-panel">
-                    <button class="btn btn-secondary" (click)="southSide()">South Side</button>
-                    <button class="btn btn-secondary" (click)="southwestSide()">Southwest Side</button>
-                    <button class="btn btn-secondary" (click)="farSouthwestSide()">Far Southwest Side</button>
-                    <button class="btn btn-secondary" (click)="farSoutheastSide()">Far Southeast Side</button>
-                </div>
+            </div>
+            <div class="floating-panel">
+                <button class="btn btn-secondary" (click)="farNorthSide()">Far North Side</button>
+                <button class="btn btn-secondary" (click)="northwestSide()">Northwest Side</button>
+                <button class="btn btn-secondary" (click)="northSide()">North Side</button>
+                <button class="btn btn-secondary" (click)="westSide()">West Side</button>
+                <button class="btn btn-secondary" (click)="central()">Central</button>
+            </div>
+            <div class="floating-panel">
+                <button class="btn btn-secondary" (click)="southSide()">South Side</button>
+                <button class="btn btn-secondary" (click)="southwestSide()">Southwest Side</button>
+                <button class="btn btn-secondary" (click)="farSouthwestSide()">Far Southwest Side</button>
+                <button class="btn btn-secondary" (click)="farSoutheastSide()">Far Southeast Side</button>
             </div>
         </div>
     </div>
     <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-        <span class="sr-only">Previous</span>
+        <img class="arrow" src="assets/img/arrow-left.png">
     </a>
     <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-        <span class="sr-only">Next</span>
+        <img class="arrow" src="assets/img/arrow-right.png">
     </a>
 </div>

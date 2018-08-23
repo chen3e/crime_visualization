@@ -11,12 +11,7 @@ export class GraphComponent implements OnInit {
     line: Boolean;
     pie: Boolean;
     LineChart = [];
-    searchParams = {
-        keyword: null,
-        categoryid: null,
-        region: null,
-        date: null
-    };
+    searchParams : any;
     crimes: any;
     constructor(private _httpService: HttpService) { }
     ngOnInit() {
@@ -85,6 +80,7 @@ export class GraphComponent implements OnInit {
         });
     }
     filterCrimes() {
+        this.searchParams = {};
         console.log("In filter");
         let observable = this._httpService.filterCrimes(this.searchParams);
         observable.subscribe(data => {
@@ -94,5 +90,36 @@ export class GraphComponent implements OnInit {
             console.log("Here are some graph crimes");
             console.log(this.crimes);
         })
+    }
+
+    pastWeek() {
+        this.searchParams = {
+            start_date: "2015-11-15",
+            end_date: "2015-11-22"
+        };
+        this.filterCrimes();
+    }
+
+    pastMonth() {
+        this.searchParams = {
+            start_date: "2015-10-22",
+            end_date: "2015-11-22"
+        };
+        this.filterCrimes();
+    }
+
+    pastYear() {
+        this.searchParams = {
+            start_date: "2014-10-22",
+            end_date: "2015-11-22"
+        };
+        this.filterCrimes();
+    }
+
+    farNorthSide() {
+        this.searchParams = {
+            region: "Far North Side",
+        };
+        this.filterCrimes();
     }
 }
