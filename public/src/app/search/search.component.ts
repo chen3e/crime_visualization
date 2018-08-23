@@ -13,7 +13,8 @@ export class SearchComponent implements OnInit {
         keyword: null,
         categoryid : null,
         region: null,
-        date: null
+        start_date: null,
+        end_date: null
     };
     showSearch: Boolean;
     searchMessage = "Filter Results";
