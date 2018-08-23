@@ -26,6 +26,7 @@ export class SearchComponent implements OnInit {
     }
 
     filterCrimes() {
+        console.log("This is searchParams in component/service:", this.searchParams);
         let observable = this._httpService.filterCrimes(this.searchParams);
         observable.subscribe(data => {
             console.log(data);
