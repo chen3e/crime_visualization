@@ -1,4 +1,4 @@
-<button class="btn btn-secondary" id="showSearch" (click)="show()">{{ searchMessage }}</button>
+<!--<button class="btn btn-secondary" id="showSearch" (click)="show()">{{ searchMessage }}</button>
 <div class="container" id="searchBar" *ngIf="showSearch">
   <h2>Search for Crimes</h2>
   <form id="searchForm" (submit)="filterCrimes()">
@@ -51,8 +51,8 @@
       <div class="row form-row">
         <input id="date" class="form-control" type="date" name="date" [(ngModel)]="searchParams.date">
       </div>
-    </div>
-    The API we're using does have time data, however every crime apparently happened at 12AM, soooo.... -->
+    </div>-->
+    
     <!-- <div class="form-group">
         <label>Time:</label>
         <div class="row form-row">
@@ -71,7 +71,7 @@
         <a class="btn btn-danger" [routerLink]='["report"]'>Report a crime</a>
     </div>
 
-<div id="carouselExampleControls" class="carousel slide graphs" data-interval="false">
+<div id="carouselExampleControls" class="carousel slide graphs" style="height:500px;" data-interval="false">
     <div class="carousel-inner">
         <div class="carousel-item active">
             <h2>Crime over Time</h2>
@@ -87,7 +87,7 @@
         <div class="carousel-item">
             <h2>Crime by Type</h2>
             <div class="graph">
-                <canvas id="chart2"></canvas>
+                <canvas id="pieChart"></canvas>
                 <div class="floating-panel">
                     <button class="btn btn-secondary" (click)="farNorthSide()">Far North Side</button>
                     <button class="btn btn-secondary" (click)="northwestSide()">Northwest Side</button>
