@@ -8,6 +8,7 @@
     background: rgba(255, 255, 255, 0.75);
     margin-top: 10px;
     z-index:1000;
+    top: 13.2vh;
 }
 
 #showSearch {
