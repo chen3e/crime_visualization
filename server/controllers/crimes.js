@@ -14,7 +14,7 @@ module.exports = {
         //     // io.emit("crime_data", { message: "Success!", data: result.body })
         //     return res.json({ message: "Success!", data: result.body });
         // });
-        Crime.find({ name:'HOMICIDE'}, function(err, data) {
+        Crime.find({ date:'2015-11-22'}, function(err, data) {
             if (err) {
                 console.log(err);
             }
