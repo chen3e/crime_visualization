@@ -39,13 +39,13 @@ export class GraphComponent implements OnInit {
         "19": "Obscenity",
         "20": "Intimidation",
         "21": "Stalking"
-  }
+    }
     // colors is a fixed array of length 21, containing 21 rgb color values.  Feel free to change these.
     colors = [
         'rgb(255,153,153)', 'rgb(255,204,153)', 'rgb(255,255,153)', 'rgb(204,255,153)', 'rgb(153,255,153)', 'rgb(153,255,204)', 'rgb(153,255,255)', 'rgb(153,204,255)', 'rgb(153,153,255)', 'rgb(204,153,255)', 'rgb(255,153,255)', 'rgb(255,153,204)', 'rgb(255,0,0)', 'rgb(255,128,0)', 'rgb(255,255,0)', 'rgb(0,255,0)', 'rgb(0,255,128)', 'rgb(0,255,255)', 'rgb(0,128,255)', 'rgb(0,0,255)', 'rgb(127,0,255)'
-  ];
+    ];
     // This is the array that gets passed to the chart. Variable size, so it needs to be reset every time.
-    dataColors = [];  
+    dataColors = [];
     precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     dataCrimeArray = [];
     crimeData = [];
@@ -173,7 +173,7 @@ export class GraphComponent implements OnInit {
             this.crimes = data["data"];
             console.log("Here are some graph crimes");
             console.log(this.crimes);
-          
+
             for (var i = 0; i < this.crimes.length; i++) {
                 //console.log(this.crimes[i]);
                 //console.log('this is the category id', this.crimes[i]['categoryid']);
@@ -209,21 +209,21 @@ export class GraphComponent implements OnInit {
         })
     }
 
-    addPie (chart, label, data) {
+    addPie(chart, label, data) {
         chart.data.labels = label;
         chart.data.datasets[0].data = data;
         chart.update();
         console.log(chart.data);
     }
 
-    removePie (chart) {
+    removePie(chart) {
         chart.data.labels = [];
         chart.data.datasets.forEach((dataset) => {
             dataset.data = {};
         });
         chart.update();
     }
-  
+
     pastWeek() {
         this.searchParams = {};
         this.searchParams = {
@@ -322,66 +322,9 @@ export class GraphComponent implements OnInit {
         };
         this.filterCrimes();
     }
-  makePieChart() {
-    if (canvas) {
-      console.log('it exisits');
-    }
-    console.log("making pie");
-    console.log(this.crimeLabels);
-    console.log(this.crimeData);
-    console.log(this.colors);
-    var canvas = <HTMLCanvasElement>document.getElementById('pieChart');
-    var ctx = canvas.getContext('2d');
-    this.myPieChart = new Chart(ctx, {
-      type: 'pie',
-      data: {
-        datasets: [{
-          data: this.crimeData,
-          backgroundColor: this.dataColors,
-          borderWidth: 0
-          
-        }],
-        labels: this.crimeLabels
-      },
-      options: {
-      }
-    })
-  }
-  initPieChart() {
-    console.log("Initializing pie chart with all data");
-    this.getAllCrimes();
-  }
-  getAllCrimes() {
-    console.log("Getting all crimes");
-    this.crimeLabels = [];
-    this.precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    this.dataCrimeArray = [];
-    this.dataColors = [];
-    this.crimeData = [];
-    let observable = this._httpService.filterCrimes({});
-    observable.subscribe(data => {
-      console.log("Here were the entered search params");
-      console.log(this.searchParams);
-      this.crimes = data["data"];
-      
-      for (var i = 0; i < data['data'].length; i++) {
-        //console.log(data['data'][i]);
-        //console.log('this is the category id', data['data'][i]['categoryid']);
-        //console.log('this is the dict data of that id', this.crimeDict[data['data'][i]['categoryid']]);
-        //console.log(this.crimeLabels[data['data'][i]['categoryid']]);
-        this.precrimeLabels[data['data'][i]['categoryid']]++;
-        //console.log(this.crimeLabels);
-      }
-      for (var j = 1; j < this.precrimeLabels.length; j++) {
-        this.dataCrimeArray.push(this.precrimeLabels[j]);
-      }
-      let sum = 0;
-      for (var k = 0; k < this.dataCrimeArray.length; k++) {
-        if (this.dataCrimeArray[k] != 0) {
-          this.crimeLabels.push(this.crimeDict[k + 1]);
-          this.crimeData.push(this.dataCrimeArray[k]);
-          this.dataColors.push(this.colors[k]);
-          sum += this.dataCrimeArray[k];
+    makePieChart() {
+        if (canvas) {
+            console.log('it exisits');
         }
         console.log("making pie");
         console.log(this.crimeLabels);
@@ -401,18 +344,6 @@ export class GraphComponent implements OnInit {
                 labels: this.crimeLabels
             },
             options: {
-                tooltips: {
-                    callbacks: {
-                        label: function(tooltipItem, data) {
-                            var dataset = data.datasets[tooltipItem.datasetIndex];
-                            var labels = data.labels;
-                            console.log(dataset)
-                            console.log(labels)
-                            var currentValue = labels[tooltipItem.index] + " - " + dataset.data[tooltipItem.index];        
-                            return currentValue + "%";
-                        }
-                    }
-                }
             }
         })
     }
@@ -421,99 +352,70 @@ export class GraphComponent implements OnInit {
         this.getAllCrimes();
     }
     getAllCrimes() {
-        console.log("In filter");
+        console.log("Getting all crimes");
+        this.crimeLabels = [];
+        this.precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        this.dataCrimeArray = [];
+        this.dataColors = [];
+        this.crimeData = [];
         let observable = this._httpService.filterCrimes({});
         observable.subscribe(data => {
             console.log("Here were the entered search params");
             console.log(this.searchParams);
             this.crimes = data["data"];
-            this.formatData();
-        })
-    }
 
-    formatData () {
-        this.dataCrimeArray = [];
-        this.crimeLabels = [];
-        this.crimeData = [];
-        this.dataColors = [];
-        for (var i = 0; i < this.crimes.length; i++) {
-            //console.log(this.crimes[i]);
-            //console.log('this is the category id', this.crimes[i]['categoryid']);
-            //console.log('this is the dict data of that id', this.crimeDict[this.crimes[i]['categoryid']]);
-            //console.log(this.crimeLabels[this.crimes[i]['categoryid']]);
-            this.precrimeLabels[this.crimes[i]['categoryid']]++;
-            //console.log(this.crimeLabels);
-        }
-        for (var j = 1; j < this.precrimeLabels.length; j++) {
-            this.dataCrimeArray.push(this.precrimeLabels[j]);
-        }
-        let sum = 0;
-        for (var k = 0; k < this.dataCrimeArray.length; k++) {
-            if (this.dataCrimeArray[k] != 0) {
-                this.crimeLabels.push(this.crimeDict[k + 1]);
-                this.crimeData.push(this.dataCrimeArray[k]);
-                this.dataColors.push(this.colors[k]);
-                sum += this.dataCrimeArray[k];
+            for (var i = 0; i < data['data'].length; i++) {
+                //console.log(data['data'][i]);
+                //console.log('this is the category id', data['data'][i]['categoryid']);
+                //console.log('this is the dict data of that id', this.crimeDict[data['data'][i]['categoryid']]);
+                //console.log(this.crimeLabels[data['data'][i]['categoryid']]);
+                this.precrimeLabels[data['data'][i]['categoryid']]++;
+                //console.log(this.crimeLabels);
             }
-        }
-        for (var l = 0; l < this.crimeData.length; l++) {
-            this.crimeData[l] = this.crimeData[l] / sum * 100;
-            this.crimeData[l] = this.crimeData[l].toFixed(2).toString();
-        }
-        console.log(this.dataCrimeArray);
-        console.log(this.crimeLabels);
-        console.log("Here are some graph crimes");
-        console.log(this.crimes);
-        this.makePieChart();
-    }
-    //filterCrimes() {
-    //  this.crimeLabels = [];
-    //  this.precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    //  this.dataCrimeArray = [];
-    //  this.dataColors = [];
-    //  this.crimeData = [];
-    //  console.log("In filter");
-    //  let observable = this._httpService.filterCrimes(this.searchParams);
-    //  observable.subscribe(data => {
-    //    console.log("Here were the entered search params");
-    //    console.log(this.searchParams);
-    //    this.crimes = data["data"];
+            for (var j = 1; j < this.precrimeLabels.length; j++) {
+                this.dataCrimeArray.push(this.precrimeLabels[j]);
+            }
+            let sum = 0;
+            for (var k = 0; k < this.dataCrimeArray.length; k++) {
+                if (this.dataCrimeArray[k] != 0) {
+                    this.crimeLabels.push(this.crimeDict[k + 1]);
+                    this.crimeData.push(this.dataCrimeArray[k]);
+                    this.dataColors.push(this.colors[k]);
+                    sum += this.dataCrimeArray[k];
+                }
+            }
+            console.log("making pie");
+            console.log(this.crimeLabels);
+            console.log(this.crimeData);
+            console.log(this.colors);
+            var canvas = <HTMLCanvasElement>document.getElementById('pieChart');
+            var ctx = canvas.getContext('2d');
+            this.myPieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    datasets: [{
+                        data: this.crimeData,
+                        backgroundColor: this.dataColors,
+                        borderWidth: 0
 
-    //    for (var i = 0; i < data['data'].length; i++) {
-    //      //console.log(data['data'][i]);
-    //      //console.log('this is the category id', data['data'][i]['categoryid']);
-    //      //console.log('this is the dict data of that id', this.crimeDict[data['data'][i]['categoryid']]);
-    //      //console.log(this.crimeLabels[data['data'][i]['categoryid']]);
-    //      this.precrimeLabels[data['data'][i]['categoryid']]++;
-    //      //console.log(this.crimeLabels);
-    //    }
-    //    for (var j = 1; j < this.precrimeLabels.length; j++) {
-    //      this.dataCrimeArray.push(this.precrimeLabels[j]);
-    //    }
-    //    for (var k = 0; k < this.dataCrimeArray.length; k++) {
-    //      if (this.dataCrimeArray[k] != 0) {
-    //        this.crimeLabels.push(this.crimeDict[k + 1]);
-    //        this.crimeData.push(this.dataCrimeArray[k]);
-    //        this.dataColors.push(this.colors[k]);
-    //      }
-    //    }
-    //    console.log(this.dataCrimeArray);
-    //    console.log(this.crimeLabels);
-    //    console.log("Here are some graph crimes");
-    //    console.log(this.crimes);
-    //    this.makePieChart();
-    //  })
-    //}
-    show() {
-        if (!this.showSearch) {
-            console.log("Showing")
-            this.showSearch = true;
-            this.searchMessage = "Hide Search";
-        }
-        else {
-            console.log("Hiding")
-            this.showSearch = false;
-            this.searchMessage = "Filter Results"
-        }
+                    }],
+                    labels: this.crimeLabels
+                },
+                options: {
+                    tooltips: {
+                        callbacks: {
+                            label: function (tooltipItem, data) {
+                                var dataset = data.datasets[tooltipItem.datasetIndex];
+                                var labels = data.labels;
+                                console.log(dataset)
+                                console.log(labels)
+                                var currentValue = labels[tooltipItem.index] + " - " + dataset.data[tooltipItem.index];
+                                return currentValue + "%";
+                            }
+                        }
+                    }
+                }
+            })
+        })
     }
 }
