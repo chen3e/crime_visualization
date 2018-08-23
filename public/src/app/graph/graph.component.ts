@@ -8,7 +8,8 @@ import { Chart } from 'chart.js';
     styleUrls: ['./graph.component.css']
 })
 export class GraphComponent implements OnInit {
-    LineChart = [];
+    LineChart: any;
+    PieChart: any;
     line: Boolean;
     pie: Boolean;
     graph1 = [];
@@ -50,8 +51,7 @@ export class GraphComponent implements OnInit {
     constructor(private _httpService: HttpService) { }
     ngOnInit() {
         this.initChart();
-        //this.initChart2();
-        this.initPieChart();
+        // this.initPieChart();
         this.showSearch = false;
         this.line = true;
         this.pie = false;
@@ -123,7 +123,7 @@ export class GraphComponent implements OnInit {
         console.log(this.crimeData);
         var canvas = <HTMLCanvasElement>document.getElementById('pieChart');
         var ctx = canvas.getContext('2d');
-        var myPieChart = new Chart(ctx, {
+        this.PieChart = new Chart(ctx, {
             type: 'pie',
             data: {
                 datasets: [{
@@ -143,6 +143,7 @@ export class GraphComponent implements OnInit {
         this.getAllCrimes();
         this.makePieChart();
     }
+
     getAllCrimes() {
         console.log("In filter");
         let observable = this._httpService.filterCrimes({});
@@ -265,7 +266,63 @@ export class GraphComponent implements OnInit {
 
     farNorthSide() {
         this.searchParams = {
-            region: "Far North Side",
+            region: "farNorthSide",
+        };
+        this.filterCrimes();
+    }
+
+    northwestSide() {
+        this.searchParams = {
+            region: "northwestSide",
+        };
+        this.filterCrimes();
+    }
+
+    northSide() {
+        this.searchParams = {
+            region: "northSide",
+        };
+        this.filterCrimes();
+    }
+
+    westSide() {
+        this.searchParams = {
+            region: "westSide",
+        };
+        this.filterCrimes();
+    }
+
+    central() {
+        this.searchParams = {
+            region: "central",
+        };
+        this.filterCrimes();
+    }
+
+    southSide() {
+        this.searchParams = {
+            region: "southSide",
+        };
+        this.filterCrimes();
+    }
+
+    southwestSide() {
+        this.searchParams = {
+            region: "southwestSide",
+        };
+        this.filterCrimes();
+    }
+
+    farSouthwestSide() {
+        this.searchParams = {
+            region: "farSouthwestSide",
+        };
+        this.filterCrimes();
+    }
+
+    farSoutheastSide() {
+        this.searchParams = {
+            region: "farSoutheastSide",
         };
         this.filterCrimes();
     }
