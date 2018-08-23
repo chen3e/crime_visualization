@@ -12,7 +12,8 @@ export class DataSearchComponent implements OnInit {
         keyword: null,
         categoryid : null,
         region: null,
-        date: null
+        start_date: null,
+        end_date: null
     };
     showSearch: Boolean;
     searchMessage = "Filter Results";
@@ -24,8 +25,7 @@ export class DataSearchComponent implements OnInit {
     }
 
     filterCrimes() {
-        //want searchParams.region to be { $and: [{latitude: { $gte: 12345 }}, {latitude: {$lte: 23456}}, {longitude: {$gte: 12345}}, {longitude: {$lte: 12345}}]}
-
+        console.log("filtering")
         let observable = this._httpService.filterCrimes(this.searchParams);
         observable.subscribe(data => {
             console.log(data);
