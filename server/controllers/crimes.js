@@ -30,7 +30,7 @@ module.exports = {
                 searchParams[key] = req.body[key];
             }
         }
-
+        console.log(searchParams['categoryid']);
         if (searchParams['categoryid']) {
             searchParams['categoryid'] = {$in: searchParams['categoryid']};
         }
