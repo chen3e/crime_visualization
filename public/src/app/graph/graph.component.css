@@ -23,6 +23,10 @@
     margin: 2% 0;
 }
 
+.abc:focus{
+  background-color:rgb(33, 30, 31);
+}
+
 .carousel-control-prev, .carousel-control-next {
     width: 10%;
 }
