@@ -42,6 +42,11 @@
     margin: 0 auto;
 }
 
+.carousel-control-prev, .carousel-control-next {
+    height: 50%;
+    margin: auto;
+}
+
 .arrow {
     width: 50px;
 }

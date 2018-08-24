@@ -135,11 +135,6 @@ module.exports = {
             }
         }
 
-        if (searchParams['keyword']) {
-            searchParams['description'] = { "$regex": searchParams['keyword'], "$options": "i" };
-            delete searchParams['keyword'];
-        }
-
         if (searchParams['start_date'] && searchParams['end_date']) {
             searchParams['date'] = { "$gte": searchParams['start_date'], "$lte": searchParams['end_date'] };
             delete searchParams['start_date'];
