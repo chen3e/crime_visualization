@@ -259,7 +259,8 @@ export class GraphComponent implements OnInit {
         this.searchParams = {
             start_date: "2015-10-22",
             end_date: "2015-11-22"
-        };
+      };
+        this.searchParams.categoryid=this.lineSelection;
         this.filterCrimesForLine();
     }
 
@@ -269,6 +270,7 @@ export class GraphComponent implements OnInit {
             start_date: "2014-10-22",
             end_date: "2015-11-22"
         };
+        this.searchParams.categoryid=this.lineSelection;
         this.filterCrimesForLine();
     }
 
