@@ -53,16 +53,19 @@ export class GraphComponent implements OnInit {
     myPieChart: any;
     lineSelection: any;
     dateArray = [];
-    dateDict = {};
+    dateDict: any;
     dateDictToArray = [];
     line = false;
+    label = "# of crimes per day";
+    week = false;
 
     constructor(private _httpService: HttpService) { }
 
     ngOnInit() {
         this.initLineChart();
-        this.initPieChart();
+        // this.initPieChart();
         this.showSearch = false;
+        this.dateDict = {};
     }
     makeLineChart() {
         console.log('trying to make lines');
@@ -74,7 +77,7 @@ export class GraphComponent implements OnInit {
             data: {
                 datasets: [{ 
                     data: this.dateArray,
-                    label: "# of crimes per day",
+                    label: this.label,
                     backgroundColor: "#6e6f71",
                     borderWidth: 4,
                     borderColor: "#075f22",
@@ -83,7 +86,13 @@ export class GraphComponent implements OnInit {
                 labels: this.dateDictToArray
             },
             options: {
-
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
             }
         });
     }
@@ -181,8 +190,10 @@ export class GraphComponent implements OnInit {
         this.dataCrimeArray = [];
         this.dataColors = [];
         this.crimeData = [];
-        this.dateDict = {};
-        this.dateArray = [];
+        if (this.week !== true) {
+            this.dateDict = {};
+            this.dateArray = [];
+        }
         let observable = this._httpService.getCrimesCount(this.searchParams);
         observable.subscribe(data => {
             console.log("*******************************Getting Crimes*********************************")
@@ -231,6 +242,7 @@ export class GraphComponent implements OnInit {
     addPie(chart, label, data) {
         chart.data.labels = label;
         chart.data.datasets[0].data = data;
+        chart.data.datasets[0].label = this.label;
         chart.update();
         console.log(chart.data);
     }
@@ -244,27 +256,45 @@ export class GraphComponent implements OnInit {
     }
 
     pastWeek() {
+        this.week = true;
         this.searchParams = {};
         this.searchParams = {
             start_date: "2015-11-15",
             end_date: "2015-11-22"
         };
+
+        this.dateArray = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+        this.dateDict = {
+            "2015-11-15": 1,
+            "2015-11-16": 2, 
+            "2015-11-17": 3,
+            "2015-11-18": 4,
+            "2015-11-19": 5,
+            "2015-11-20": 6, 
+            "2015-11-21": 7, 
+            "2015-11-22": 8,
+        }
         //I was going to add a feature to show which crime to display vs time - j
         this.searchParams.categoryid = this.lineSelection;
+        if (this.lineSelection) {
+            this.label = this.crimeDict[this.lineSelection];
+        }
         this.filterCrimesForLine();
     }
 
     pastMonth() {
+        this.week = false;
         this.searchParams = {};
         this.searchParams = {
             start_date: "2015-10-22",
             end_date: "2015-11-22"
-      };
-        this.searchParams.categoryid=this.lineSelection;
+        };
+        this.searchParams.categoryid = this.lineSelection;
         this.filterCrimesForLine();
     }
 
     pastYear() {
+        this.week = false;
         this.searchParams = {};
         this.searchParams = {
             start_date: "2014-10-22",
@@ -447,8 +477,6 @@ export class GraphComponent implements OnInit {
                 else {
                     this.dateArray[this.dateDict[this.crimes[i]['date']]]++;
                 }
-                //console.log("Here is dateDict", this.dateDict);
-                //console.log("Here is dateArray", this.dateArray);
                 //console.log(this.crimes[i]);
                 //console.log('this is the category id', this.crimes[i]['categoryid']);
                 //console.log('this is the dict data of that id', this.crimeDict[this.crimes[i]['categoryid']]);
@@ -456,6 +484,8 @@ export class GraphComponent implements OnInit {
                 this.precrimeLabels[this.crimes[i]['categoryid']]++;
                 //console.log(this.crimeLabels);
             }
+            console.log("Here is dateDict", this.dateDict);
+            console.log("Here is dateArray", this.dateArray);
             for (var key in this.dateDict) {
                 this.dateDictToArray.push(key);
             }
