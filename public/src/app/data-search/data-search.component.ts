@@ -48,8 +48,12 @@ export class DataSearchComponent implements OnInit {
                         description[this._data.crimes[i].description[j][0]] = true;
                     }
                 }
+                let image = {
+                    url: `assets/img/${this._data.crimes[i].catname.split(" ").join("")}.png`,
+                }
                 this._data.crimes[i].description = description;
                 console.log(this._data.crimes[i].description);
+                this._data.crimes[i].icon = image;
             }
         })
     }
