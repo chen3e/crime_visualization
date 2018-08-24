@@ -12,7 +12,29 @@
                 <canvas id="lineChart" height="160"></canvas>
             </div>
             <div class="floating-panel">
-                <input type="text" [(ngModel)]="lineSelection" />
+                <select [(ngModel)]="lineSelection">
+                    <option value="1">Battery</option>
+                    <option value="2">Assault</option>
+                    <option value="3">Motor Vehicle Theft</option>
+                    <option value="4">Theft</option>
+                    <option value="5">Criminal Damage</option>
+                    <option value="6">Burglary</option>
+                    <option value="8">Robbery</option>
+                    <option value="21">Stalking</option>
+                    <option value="7">Sex Offense</option>
+                    <option value="10">Sexual Assault</option>
+                    <option value="11">Deceptive Practice</option>
+                    <option value="12">Weapons Violation</option>
+                    <option value="13">Narcotics</option>
+                    <option value="14">Prostitution</option>
+                    <option value="15">Arson</option>
+                    <option value="16">Homicide</option>
+                    <option value="17">Gambling</option>
+                    <option value="18">Kidnapping</option>
+                    <option value="19">Obscenity</option>
+                    <option value="20">Intimidation</option>
+                    <option value="9">Miscellaneous</option>
+                </select>
                 <button class="btn btn-secondary" (click)="pastWeek()">Past Week</button>
                 <button class="btn btn-secondary" (click)="pastMonth()">Past Month</button>
                 <button class="btn btn-secondary" (click)="pastYear()">Past Year</button>
