@@ -22,6 +22,7 @@ tbody {
     background-color: rgba(255, 255, 255, 0.6);
     display: block;
     margin-top: 5vh;
+    text-shadow: 5px 5px 33px grey;
 }
 
 table td {
@@ -32,8 +33,13 @@ table tbody tr:first-of-type {
     height: 9vh;
 }
 
+tr {
+    box-shadow: 1px 1px 2px black;
+}
+
 img {
     width: 35px;
+    box-shadow: 1px 1px 1px black;
 }
 
 .thPosition {
