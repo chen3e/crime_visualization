@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import { Url } from 'url';
-// import { MapComponent } from '../map/map.component';
 
 @Component({
-  selector: 'app-data',
-  templateUrl: './data.component.html',
-  styleUrls: ['./data.component.css']
+    selector: 'app-data',
+    templateUrl: './data.component.html',
+    styleUrls: ['./data.component.css']
 })
 export class DataComponent implements OnInit {
   crimes: [{
@@ -17,14 +15,13 @@ export class DataComponent implements OnInit {
     icon: any
   }];
 
-  constructor(
-    private _httpService: HttpService,
-    // private _map: MapComponent,
-  ) { }
+    constructor(
+        private _httpService: HttpService
+    ) { }
 
-  ngOnInit() {
-    this.getCrimes();
-  }
+    ngOnInit() {
+        this.getCrimes();
+    }
 
   getCrimes() {
     let observable = this._httpService.getCrimes();
