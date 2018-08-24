@@ -58,11 +58,11 @@ export class MapComponent implements OnInit {
             }
             else {
                 content += `<div id="content">` +
-                `<div id="siteNotice">` +
-                "</div>" +
-                `<h2 id="firstHeading" class="firstHeading">${this.crimes[i].catname}</h2>` +
-                `<div id="bodyContent">` +
-                `<p>details: ${this.crimes[i].description}</p>`;
+                    `<div id="siteNotice">` +
+                    "</div>" +
+                    `<h2 id="firstHeading" class="firstHeading">${this.crimes[i].catname}</h2>` +
+                    `<div id="bodyContent">` +
+                    `<p>details: ${this.crimes[i].description}</p>`;
             }
             markers.push({ position: new google.maps.LatLng(Number(this.crimes[i].latitude), Number(this.crimes[i].longitude)), map: this.map, title: this.crimes[i].catname, content: content });
         }
@@ -76,7 +76,7 @@ export class MapComponent implements OnInit {
                 content: markers[i].content
             });
             var marker = new google.maps.Marker({
-                icon : image,
+                icon: image,
                 position: markers[i].position,
                 map: this.map,
                 title: markers[i].title
@@ -85,12 +85,12 @@ export class MapComponent implements OnInit {
                 return function () {
                     infowindow.open(this.map, marker);
                 }
-          })(marker, infowindow));
-            google.maps.event.addListener(marker, 'mouseout', (function(marker, infowindow){
-              return function () {
-                infowindow.close(this.map, marker);
-              }
-            })(marker,infowindow));
+            })(marker, infowindow));
+            google.maps.event.addListener(marker, 'mouseout', (function (marker, infowindow) {
+                return function () {
+                    infowindow.close(this.map, marker);
+                }
+            })(marker, infowindow));
             this.markers.push(marker);
         }
         console.log(markers);

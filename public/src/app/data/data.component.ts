@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
+import { Url } from 'url';
 // import { MapComponent } from '../map/map.component';
 
 @Component({
@@ -12,7 +13,8 @@ export class DataComponent implements OnInit {
     catname: String,
     latitude: Number,
     longitude: Number,
-    description: any
+    description: any,
+    icon: any
   }];
 
   constructor(
@@ -47,8 +49,12 @@ export class DataComponent implements OnInit {
             description[this.crimes[i].description[j][0]] = true;
           }
         }
+        let image = {
+          url: `assets/img/${this.crimes[i].catname.split(" ").join("")}.png`,
+        }
         this.crimes[i].description = description;
         console.log(this.crimes[i].description);
+        this.crimes[i].icon = image;
       }
     })
   }
