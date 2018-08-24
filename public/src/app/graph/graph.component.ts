@@ -103,7 +103,7 @@ export class GraphComponent implements OnInit {
                 datasets: [{
                     data: this.crimeData,
                     backgroundColor: this.dataColors,
-                    borderWidth: 0
+                    borderWidth: 0.5
 
                 }],
                 labels: this.crimeLabels
@@ -201,8 +201,8 @@ export class GraphComponent implements OnInit {
                 else {
                     this.dateArray[this.dateDict[this.crimes[i]['date']]]++;
                 }
-                console.log("Here is dateDict", this.dateDict);
-                console.log("Here is dateArray", this.dateArray);
+                //console.log("Here is dateDict", this.dateDict);
+                //console.log("Here is dateArray", this.dateArray);
                 //console.log(this.crimes[i]);
                 //console.log('this is the category id', this.crimes[i]['categoryid']);
                 //console.log('this is the dict data of that id', this.crimeDict[this.crimes[i]['categoryid']]);
@@ -223,6 +223,8 @@ export class GraphComponent implements OnInit {
             console.log("Here are some graph crimes");
             console.log(this.crimes);
             data = [{ data: this.crimeData }];
+            console.log("Here are dates", this.dateDictToArray);
+            console.log("Here are faoiwefjpaie", this.dateArray);
             this.removePie(this.lineChart);
             this.addPie(this.lineChart, this.dateDictToArray, this.dateArray);
         })
