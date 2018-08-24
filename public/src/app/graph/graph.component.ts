@@ -61,25 +61,26 @@ export class GraphComponent implements OnInit {
 
     ngOnInit() {
         this.initLineChart();
-        this.initPieChart();
+        //this.initPieChart();
         this.showSearch = false;
     }
     makeLineChart() {
         console.log('trying to make lines');
+        console.log(this.crimeData);
         var canvas = <HTMLCanvasElement>document.getElementById('lineChart');
         var ctx = canvas.getContext('2d');
         this.lineChart = new Chart(ctx, {
             type: 'line',
             data: {
                 datasets: [{
-                    data: this.crimeData,
+                    data: this.dateArray,
                     label: "# of crimes per day",
                     backgroundColor: "#6e6f71",
                     borderWidth: 4,
                     borderColor: "#075f22",
 
                 }],
-                labels: this.crimeLabels
+                labels: this.dateDictToArray
             },
             options: {
                 
@@ -392,8 +393,13 @@ export class GraphComponent implements OnInit {
         console.log("In GetCrimesForLine");
         this.searchParams = {};
         this.searchParams = {
+<<<<<<< HEAD
             start_date: "2015-15-15",
             end_date: "2015-22-15"
+=======
+            start_date: "2015-11-15",
+            end_date: "2015-11-22"
+>>>>>>> bf46546560d2a5d19cb9b906841600fc069e4f37
         };
         let observable = this._httpService.getCrimesCount(this.searchParams);
         observable.subscribe(data => {
@@ -437,6 +443,7 @@ export class GraphComponent implements OnInit {
         console.log(this.crimes);
         this.makePieChart();
     }
+<<<<<<< HEAD
     formatDataForLine () {
         console.log("In filter for line");
         this.crimeLabels = [];
@@ -493,4 +500,93 @@ export class GraphComponent implements OnInit {
             this.addPie(this.lineChart, this.dateDictToArray, this.dateArray);
         })
     }
+=======
+  formatDataForLine() {
+    console.log("In filter for line");
+    this.crimeLabels = [];
+    this.dateDictToArray = [];
+    this.precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    this.dataCrimeArray = [];
+    this.dataColors = [];
+    this.crimeData = [];
+    this.dateDict = {};
+    this.dateArray = [];
+    var r = 0;
+    var g = 255;
+    var b = 0;
+    console.log('here are the search params in format dataline', this.searchParams);
+    let observable = this._httpService.getCrimesCount(this.searchParams);
+    observable.subscribe(data => {
+      console.log(data);
+      console.log("Crimes:")
+      this.crimes = data["data"];
+      console.log("Here are some graph crimes");
+      console.log(this.crimes);
+      var count = 0;
+      for (var i = 0; i < this.crimes.length; i++) {
+        if (!this.dateDict[this.crimes[i]['date']]) {
+          this.dateDict[this.crimes[i]['date']] = count;
+          this.dateArray.push(1);
+          count++;
+        }
+        else {
+          this.dateArray[this.dateDict[this.crimes[i]['date']]]++;
+        }
+        //console.log("Here is dateDict", this.dateDict);
+        //console.log("Here is dateArray", this.dateArray);
+        //console.log(this.crimes[i]);
+        //console.log('this is the category id', this.crimes[i]['categoryid']);
+        //console.log('this is the dict data of that id', this.crimeDict[this.crimes[i]['categoryid']]);
+        //console.log(this.crimeLabels[this.crimes[i]['categoryid']]);
+        this.precrimeLabels[this.crimes[i]['categoryid']]++;
+        //console.log(this.crimeLabels);
+      }
+      for (var key in this.dateDict) {
+        this.dateDictToArray.push(key);
+      }
+      for (var j = 0; j < this.dateArray.length - 1; j++) {
+        this.dateArray[j] = this.dateArray[j + 1];
+      }
+      this.dateArray.pop();
+      console.log('we should have altered datearray', this.dateArray);
+
+      data = [{ data: this.crimeData }];
+      this.makeLineChart();
+    })
+  }
+
+    //filterCrimesForPie() {
+    //  this.crimeLabels = [];
+    //  this.precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    //  this.dataCrimeArray = [];
+    //  this.dataColors = [];
+    //  this.crimeData = [];
+    //  console.log("In filter");
+    //  let observable = this._httpService.getCrimesCount(this.searchParams);
+    //  observable.subscribe(data => {
+    //    console.log("Here were the entered search params");
+    //    console.log(this.searchParams);
+    //    this.crimes = data["data"];
+
+    //                 }],
+    //                 labels: this.crimeLabels
+    //             },
+    //             options: {
+    //                 tooltips: {
+    //                     callbacks: {
+    //                         label: function (tooltipItem, data) {
+    //                             var dataset = data.datasets[tooltipItem.datasetIndex];
+    //                             var labels = data.labels;
+    //                             console.log(dataset)
+    //                             console.log(labels)
+    //                             var currentValue = labels[tooltipItem.index] + " - " + dataset.data[tooltipItem.index];
+    //                             return currentValue + "%";
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         })
+    //     })
+    // }
+>>>>>>> bf46546560d2a5d19cb9b906841600fc069e4f37
 }
