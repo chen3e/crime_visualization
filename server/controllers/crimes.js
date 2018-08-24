@@ -135,9 +135,7 @@ module.exports = {
             }
         }
         console.log(searchParams['categoryid']);
-        if (searchParams['categoryid']) {
-            searchParams['categoryid'] = { $in: searchParams['categoryid'] };
-        }
+        
 
         if (searchParams['keyword']) {
             searchParams['description'] = { "$regex": searchParams['keyword'], "$options": "i" };
@@ -203,6 +201,8 @@ module.exports = {
             delete searchParams['region'];
         }
         console.log("This is searchParams in crimes.js", searchParams);
+        
+        console.log("Should have changed searchParams", searchParams);
         var agg = Crime.aggregate([{ $match: searchParams }, { $sort: { date: 1 } }])
         agg.options = { allowDiskUse: true }
         agg.exec(function (err, data) {
@@ -210,6 +210,8 @@ module.exports = {
                 console.log(err);
             }
             //console.log(data);
+            console.log("Are we inheree?");
+            console.log(data);
             return res.json({ message: "Success!", data: data });
         })
     }
