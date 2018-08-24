@@ -9,11 +9,9 @@
         <div class="carousel-item active">
             <h2>Crime over Time</h2>
             <div class="graph">
-                <canvas id="lineChart"></canvas>
+                <canvas id="lineChart" height="160"></canvas>
             </div>
-            <p>where am i</p>
             <div class="floating-panel">
-                <p>i am where</p>
                 <input type="text" [(ngModel)]="lineSelection" />
                 <button class="btn btn-secondary" (click)="pastWeek()">Past Week</button>
                 <button class="btn btn-secondary" (click)="pastMonth()">Past Month</button>
@@ -23,7 +21,7 @@
         <div class="carousel-item">
             <h2>Crime by Type</h2>
             <div class="graph">
-                <canvas id="pieChart" height="160"></canvas>
+                <canvas id="pieChart" height="150"></canvas>
                 <div class="floating-panel">
                     <button class="btn btn-secondary" (click)="farNorthSide()">Far North Side</button>
                     <button class="btn btn-secondary" (click)="northwestSide()">Northwest Side</button>

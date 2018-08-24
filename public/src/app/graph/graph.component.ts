@@ -10,8 +10,6 @@ import { Chart } from 'chart.js';
 export class GraphComponent implements OnInit {
     lineChart: any;
     PieChart: any;
-    line: Boolean;
-    pie: Boolean;
     graph1 = [];
     searchParams: any;
     // crimeLabels are the type of crime, stored as an array so they can be displayed on the chart. Array size is variable
@@ -63,8 +61,6 @@ export class GraphComponent implements OnInit {
         this.initLineChart();
         this.initPieChart();
         this.showSearch = false;
-        this.line = true;
-        this.pie = false;
     }
     makeLineChart() {
         console.log('trying to make lines');
@@ -75,25 +71,16 @@ export class GraphComponent implements OnInit {
             data: {
                 datasets: [{
                     data: this.crimeData,
-                    backgroundColor: this.dataColors,
-                    borderWidth: 0
+                    label: "# of crimes per day",
+                    backgroundColor: "#6e6f71",
+                    borderWidth: 4,
+                    borderColor: "#075f22",
 
                 }],
                 labels: this.crimeLabels
             },
             options: {
-                tooltips: {
-                    callbacks: {
-                        label: function(tooltipItem, data) {
-                            var dataset = data.datasets[tooltipItem.datasetIndex];
-                            var labels = data.labels;
-                            console.log(dataset)
-                            console.log(labels)
-                            var currentValue = labels[tooltipItem.index] + " - " + dataset.data[tooltipItem.index];        
-                            return currentValue + "%";
-                        }
-                    }
-                }
+                
             }
         });
     }
@@ -230,25 +217,25 @@ export class GraphComponent implements OnInit {
             }
             this.dateArray.pop();
             console.log('we should have altered datearray', this.dateArray);
-            for(var k = 0; k < this.dateArray.length; k++){
-              if (r > 245) {
-                r = 5;
-              }
-              if (g < 10) {
-                g = 250;
-              }
-              if (b > 250) {
-                b = 0;
-              }
-              var rr = r.toString();
-              var gg = g.toString();
-              var bb = b.toString();
-              var rgb = ('rgb(' + rr + ',' + gg + ',' + bb + ')');
-              this.dataColors.push(rgb);
-              r += 10;
-              g -= 10;
-              b += 5;
-            }
+            // for(var k = 0; k < this.dateArray.length; k++){
+            //   if (r > 245) {
+            //     r = 5;
+            //   }
+            //   if (g < 10) {
+            //     g = 250;
+            //   }
+            //   if (b > 250) {
+            //     b = 0;
+            //   }
+            //   var rr = r.toString();
+            //   var gg = g.toString();
+            //   var bb = b.toString();
+            //   var rgb = ('rgb(' + rr + ',' + gg + ',' + bb + ')');
+            //   this.dataColors.push(rgb);
+            //   r += 10;
+            //   g -= 10;
+            //   b += 5;
+            // }
             console.log(this.dataCrimeArray);
             console.log(this.crimeLabels);
             console.log("Here are some graph crimes");
@@ -422,10 +409,6 @@ export class GraphComponent implements OnInit {
         this.dataColors = [];
 
         for (var i = 0; i < this.crimes.length; i++) {
-            //console.log(this.crimes[i]);
-            //console.log('this is the category id', this.crimes[i]['categoryid']);
-            //console.log('this is the dict data of that id', this.crimeDict[this.crimes[i]['categoryid']]);
-            //console.log(this.crimeLabels[this.crimes[i]['categoryid']]);
             this.precrimeLabels[this.crimes[i]['categoryid']]++;
             //console.log(this.crimeLabels);
         }
@@ -466,12 +449,6 @@ export class GraphComponent implements OnInit {
             else {
               this.dateArray[this.dateDict[this.crimes[i]['date']]]++;
           }
-            //console.log("Here is dateDict", this.dateDict);
-            //console.log("Here is dateArray", this.dateArray);
-            //console.log(this.crimes[i]);
-            //console.log('this is the category id', this.crimes[i]['categoryid']);
-            //console.log('this is the dict data of that id', this.crimeDict[this.crimes[i]['categoryid']]);
-            //console.log(this.crimeLabels[this.crimes[i]['categoryid']]);
             this.precrimeLabels[this.crimes[i]['categoryid']]++;
             //console.log(this.crimeLabels);
         }
@@ -491,10 +468,6 @@ export class GraphComponent implements OnInit {
             this.crimeData[l] = this.crimeData[l] / sum * 100;
             this.crimeData[l] = this.crimeData[l].toFixed(2).toString();
         }
-        //console.log(this.dataCrimeArray);
-        //console.log(this.crimeLabels);
-        //console.log("Here are some graph crimes");
-        //console.log(this.crimes);
         this.makeLineChart();
     }
     //filterCrimesForPie() {
