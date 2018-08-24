@@ -19,4 +19,8 @@ export class HttpService {
     reportCrime(crime) {
         return this._http.post("/reportCrime", crime);
     }
+
+    getCrimesCount(searchParams){
+        return this._http.post('/crimes/count', searchParams);
+    }
 }

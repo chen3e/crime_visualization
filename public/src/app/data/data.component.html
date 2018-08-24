@@ -3,7 +3,9 @@
   <table class="table table-striped table-fixed">
     <thead class="thead-dark">
       <tr>
-        <th scope="col">Address</th>
+        <!-- <div class="thPosition"> -->
+          <th scope="col">Address</th>
+        <!-- </div> -->
         <th scope="col">City</th>
         <th scope="col">Category</th>
         <th scope="col">Date</th>
@@ -15,14 +17,15 @@
     </thead>
     <tbody>
       <tr *ngFor="let crime of crimes">
-        <td>{{crime.address}}</td>
-        <td>{{crime.city}}</td>
-        <td>{{crime.catname}}</td>
-        <td>{{crime.date}}</td>
-        <td>{{crime.description['Time']}}</td>
-        <td>{{crime.description['Location']}}</td>
-        <td>{{crime.description['Details']}}</td>
-        <td>{{crime.description['Arrest Made']}}</td>
+        <td style="width: 13.5%" >{{crime.address}}</td>
+        <td style="width: 8.7%" >{{crime.city}}</td>
+        <td style="width: 14.9%" >
+          <img src="{{crime.icon.url}}" alt=""> {{crime.catname}}</td>
+        <td style="width: 9.2%" >{{crime.date}}</td>
+        <td style="width: 9.5%"  *ngIf="crime.description['Time']">{{crime.description.Time}}</td>
+        <td style="width: 14%"  *ngIf="crime.description['Location']">{{crime.description.Location}}</td>
+        <td style="width: 12%"  *ngIf="crime.description['Details']">{{crime.description.Details}}</td>
+        <td *ngIf="crime.description['Arrest Made']">{{crime.description['Arrest Made']}}</td>
       </tr>
     </tbody>
   </table>

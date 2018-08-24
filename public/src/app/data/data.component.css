@@ -1,10 +1,32 @@
 .tableDiv {
-    max-height: 86vh;
+    max-height: 85vh;
     overflow: auto;
     position: relative;
-    top: 9vh;
+    top: 7vh;
+}
+
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+thead {
+    position: fixed;
+    display: inherit;
+    width: 100%;
+    box-shadow: 0px 4px 15px black;
 }
 
 tbody {
     background-color: rgba(255, 255, 255, 0.6);
+    display: block;
+    margin-top: 4vh;
+}
+
+img {
+    width: 35px;
+}
+
+.thPosition {
+    position: absolute
 }

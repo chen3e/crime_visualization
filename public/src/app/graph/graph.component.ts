@@ -8,7 +8,7 @@ import { Chart } from 'chart.js';
     styleUrls: ['./graph.component.css']
 })
 export class GraphComponent implements OnInit {
-    LineChart: any;
+    lineChart: any;
     PieChart: any;
     line: Boolean;
     pie: Boolean;
@@ -53,113 +53,88 @@ export class GraphComponent implements OnInit {
     showSearch: Boolean;
     searchMessage = "Filter Results";
     myPieChart: any;
-
+    lineSelection:any;
+    dateArray = [];
+    dateDict = {};
+    dateDictToArray = [];
     constructor(private _httpService: HttpService) { }
 
     ngOnInit() {
-        this.initChart();
+        this.initLineChart();
         this.initPieChart();
         this.showSearch = false;
         this.line = true;
         this.pie = false;
     }
-    initChart() {
-        this.LineChart = new Chart('lineChart', {
-            type: 'line',
-            data: {
-
-                labels: ['jan', 'feb', 'march', 'april', 'may', 'june', 'july', 'aug', 'sep', 'oct', 'nov', 'dec'],
-                datasets: [{
-
-                    label: 'Number of items sold in months',
-
-                    data: [9, 2, 4, 15, 42, 88, 100, 5],
-                    fill: false,
-                    lineTension: 0.2,
-                    borderColor: 'red',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                title: {
-                    text: 'Line Chart',
-                    display: true
-                },
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
-                }
-            }
-        })
-    }
-    initChart2() {
-        var canvas = <HTMLCanvasElement>document.getElementById('chart2');
+    makeLineChart() {
+        console.log('trying to make lines');
+        var canvas = <HTMLCanvasElement>document.getElementById('lineChart');
         var ctx = canvas.getContext('2d');
-        var chart = new Chart(ctx, {
+        this.lineChart = new Chart(ctx, {
             type: 'line',
             data: {
-                //labels for x axis - Dataset data will be at each point on this array - if this array is shorter
-                // than the data array, it will leave the data points off that go beyond label array length
-                labels: ['jan', 'feb', 'mar', 'april', 'may', 'june', 'july'],
                 datasets: [{
-                    //title/legend?
-                    label: "My First dataset",
-                    backgroundColor: 'pink',
-                    borderColor: 'blue',
-                    //this is the data we want to provide - ideally array length is same size as labels array
-                    data: [2, 5, 6, 78, 4, 6]
-                }]
+                    data: this.crimeData,
+                    backgroundColor: this.dataColors,
+                    borderWidth: 0
+
+                }],
+                labels: this.crimeLabels
             },
             options: {
-                hover: {
-                    mode: 'nearest',
-                    intersect: false,
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var labels = data.labels;
+                            console.log(dataset)
+                            console.log(labels)
+                            var currentValue = labels[tooltipItem.index] + " - " + dataset.data[tooltipItem.index];        
+                            return currentValue + "%";
+                        }
+                    }
                 }
             }
         });
     }
-    //filterCrimes() {
-    //  this.crimeLabels = [];
-    //  this.precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    //  this.dataCrimeArray = [];
-    //  this.dataColors = [];
-    //  this.crimeData = [];
-    //  console.log("In filter");
-    //  let observable = this._httpService.filterCrimes(this.searchParams);
-    //  observable.subscribe(data => {
-    //    console.log("Here were the entered search params");
-    //    console.log(this.searchParams);
-    //    this.crimes = data["data"];
+    makePieChart() {
+        if (canvas) {
+            console.log('it exisits');
+        }
+        console.log("making pie");
+        console.log(this.crimeLabels);
+        console.log(this.crimeData);
+        console.log(this.colors);
+        var canvas = <HTMLCanvasElement>document.getElementById('pieChart');
+        var ctx = canvas.getContext('2d');
+        this.myPieChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                datasets: [{
+                    data: this.crimeData,
+                    backgroundColor: this.dataColors,
+                    borderWidth: 0
 
-    //    for (var i = 0; i < data['data'].length; i++) {
-    //      //console.log(data['data'][i]);
-    //      //console.log('this is the category id', data['data'][i]['categoryid']);
-    //      //console.log('this is the dict data of that id', this.crimeDict[data['data'][i]['categoryid']]);
-    //      //console.log(this.crimeLabels[data['data'][i]['categoryid']]);
-    //      this.precrimeLabels[data['data'][i]['categoryid']]++;
-    //      //console.log(this.crimeLabels);
-    //    }
-    //    for (var j = 1; j < this.precrimeLabels.length; j++) {
-    //      this.dataCrimeArray.push(this.precrimeLabels[j]);
-    //    }
-    //    for (var k = 0; k < this.dataCrimeArray.length; k++) {
-    //      if (this.dataCrimeArray[k] != 0) {
-    //        this.crimeLabels.push(this.crimeDict[k + 1]);
-    //        this.crimeData.push(this.dataCrimeArray[k]);
-    //        this.dataColors.push(this.colors[k]);
-    //      }
-    //    }
-    //    console.log(this.dataCrimeArray);
-    //    console.log(this.crimeLabels);
-    //    console.log("Here are some graph crimes");
-    //    console.log(this.crimes);
-    //    this.makePieChart();
-    //  })
-    //}
-    filterCrimes() {
+                }],
+                labels: this.crimeLabels
+            },
+            options: {
+                tooltips: {
+                    callbacks: {
+                        label: function(tooltipItem, data) {
+                            var dataset = data.datasets[tooltipItem.datasetIndex];
+                            var labels = data.labels;
+                            console.log(dataset)
+                            console.log(labels)
+                            var currentValue = labels[tooltipItem.index] + " - " + dataset.data[tooltipItem.index];        
+                            return currentValue + "%";
+                        }
+                    }
+                }
+            }
+        })
+    }
+    filterCrimesForPie() {
         console.log("In filter");
         this.crimeLabels = [];
         this.precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -208,6 +183,81 @@ export class GraphComponent implements OnInit {
             this.addPie(this.myPieChart, this.crimeLabels, this.crimeData);
         })
     }
+    filterCrimesForLine() {
+        console.log("In filter for line");
+        this.crimeLabels = [];
+        this.dateDictToArray = [];
+        this.precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+        this.dataCrimeArray = [];
+        this.dataColors = [];
+        this.crimeData = [];
+        this.dateDict = {};
+        this.dateArray = [];
+        var r = 0;
+        var g = 255;
+        var b = 0;
+        let observable = this._httpService.getCrimesCount(this.searchParams);
+        observable.subscribe(data => {
+            console.log(data);
+            console.log("Crimes:")
+            this.crimes = data["data"];
+            console.log("Here are some graph crimes");
+            console.log(this.crimes);
+            var count = 0;
+            for (var i = 0; i < this.crimes.length; i++) {
+                if(!this.dateDict[this.crimes[i]['date']]){
+                  this.dateDict[this.crimes[i]['date']] = count;
+                  this.dateArray.push(1);
+                  count++;
+                }
+                else {
+                  this.dateArray[this.dateDict[this.crimes[i]['date']]]++;
+              }
+                console.log("Here is dateDict", this.dateDict);
+                console.log("Here is dateArray", this.dateArray);
+                //console.log(this.crimes[i]);
+                //console.log('this is the category id', this.crimes[i]['categoryid']);
+                //console.log('this is the dict data of that id', this.crimeDict[this.crimes[i]['categoryid']]);
+                //console.log(this.crimeLabels[this.crimes[i]['categoryid']]);
+                this.precrimeLabels[this.crimes[i]['categoryid']]++;
+                //console.log(this.crimeLabels);
+            }
+            for(var key in this.dateDict){
+              this.dateDictToArray.push(key);
+            }
+            for(var j = 0; j<this.dateArray.length-1; j++){
+              this.dateArray[j] = this.dateArray[j + 1];
+            }
+            this.dateArray.pop();
+            console.log('we should have altered datearray', this.dateArray);
+            for(var k = 0; k < this.dateArray.length; k++){
+              if (r > 245) {
+                r = 5;
+              }
+              if (g < 10) {
+                g = 250;
+              }
+              if (b > 250) {
+                b = 0;
+              }
+              var rr = r.toString();
+              var gg = g.toString();
+              var bb = b.toString();
+              var rgb = ('rgb(' + rr + ',' + gg + ',' + bb + ')');
+              this.dataColors.push(rgb);
+              r += 10;
+              g -= 10;
+              b += 5;
+            }
+            console.log(this.dataCrimeArray);
+            console.log(this.crimeLabels);
+            console.log("Here are some graph crimes");
+            console.log(this.crimes);
+            data = [{ data: this.crimeData }];
+            this.removePie(this.lineChart);
+            this.addPie(this.lineChart, this.dateDictToArray, this.dateArray);
+        })
+    }
 
     addPie(chart, label, data) {
         chart.data.labels = label;
@@ -230,7 +280,9 @@ export class GraphComponent implements OnInit {
             start_date: "2015-11-15",
             end_date: "2015-11-22"
         };
-        this.filterCrimes();
+        //I was going to add a feature to show which crime to display vs time - j
+        this.searchParams.categoryid=this.lineSelection;
+        this.filterCrimesForLine();
     }
 
     pastMonth() {
@@ -239,7 +291,7 @@ export class GraphComponent implements OnInit {
             start_date: "2015-10-22",
             end_date: "2015-11-22"
         };
-        this.filterCrimes();
+        this.filterCrimesForLine();
     }
 
     pastYear() {
@@ -248,7 +300,7 @@ export class GraphComponent implements OnInit {
             start_date: "2014-10-22",
             end_date: "2015-11-22"
         };
-        this.filterCrimes();
+        this.filterCrimesForLine();
     }
 
     farNorthSide() {
@@ -256,7 +308,7 @@ export class GraphComponent implements OnInit {
         this.searchParams = {
             region: "farNorthSide",
         };
-        this.filterCrimes();
+        this.filterCrimesForPie();
     }
 
     northwestSide() {
@@ -264,7 +316,7 @@ export class GraphComponent implements OnInit {
         this.searchParams = {
             region: "northwestSide",
         };
-        this.filterCrimes();
+        this.filterCrimesForPie();
     }
 
     northSide() {
@@ -272,7 +324,7 @@ export class GraphComponent implements OnInit {
         this.searchParams = {
             region: "northSide",
         };
-        this.filterCrimes();
+        this.filterCrimesForPie();
     }
 
     westSide() {
@@ -280,7 +332,7 @@ export class GraphComponent implements OnInit {
         this.searchParams = {
             region: "westSide",
         };
-        this.filterCrimes();
+        this.filterCrimesForPie();
     }
 
     central() {
@@ -288,7 +340,7 @@ export class GraphComponent implements OnInit {
         this.searchParams = {
             region: "central",
         };
-        this.filterCrimes();
+        this.filterCrimesForPie();
     }
 
     southSide() {
@@ -296,7 +348,7 @@ export class GraphComponent implements OnInit {
         this.searchParams = {
             region: "southSide",
         };
-        this.filterCrimes();
+        this.filterCrimesForPie();
     }
 
     southwestSide() {
@@ -304,7 +356,7 @@ export class GraphComponent implements OnInit {
         this.searchParams = {
             region: "southwestSide",
         };
-        this.filterCrimes();
+        this.filterCrimesForPie();
     }
 
     farSouthwestSide() {
@@ -312,7 +364,7 @@ export class GraphComponent implements OnInit {
         this.searchParams = {
             region: "farSouthwestSide",
         };
-        this.filterCrimes();
+        this.filterCrimesForPie();
     }
 
     farSoutheastSide() {
@@ -320,36 +372,17 @@ export class GraphComponent implements OnInit {
         this.searchParams = {
             region: "farSoutheastSide",
         };
-        this.filterCrimes();
-    }
-    makePieChart() {
-        if (canvas) {
-            console.log('it exisits');
-        }
-        console.log("making pie");
-        console.log(this.crimeLabels);
-        console.log(this.crimeData);
-        console.log(this.colors);
-        var canvas = <HTMLCanvasElement>document.getElementById('pieChart');
-        var ctx = canvas.getContext('2d');
-        this.myPieChart = new Chart(ctx, {
-            type: 'pie',
-            data: {
-                datasets: [{
-                    data: this.crimeData,
-                    backgroundColor: this.dataColors,
-                    borderWidth: 0
+        this.filterCrimesForPie();
+  }
 
-                }],
-                labels: this.crimeLabels
-            },
-            options: {
-            }
-        })
-    }
+    
     initPieChart() {
         console.log("Initializing pie chart with all data");
         this.getAllCrimes();
+    }
+    initLineChart(){
+        console.log("Initializing line chart with all data");
+        this.getCrimesForLine();
     }
     getAllCrimes() {
         console.log("Getting all crimes");
@@ -363,59 +396,138 @@ export class GraphComponent implements OnInit {
             console.log("Here were the entered search params");
             console.log(this.searchParams);
             this.crimes = data["data"];
-
-            for (var i = 0; i < data['data'].length; i++) {
-                //console.log(data['data'][i]);
-                //console.log('this is the category id', data['data'][i]['categoryid']);
-                //console.log('this is the dict data of that id', this.crimeDict[data['data'][i]['categoryid']]);
-                //console.log(this.crimeLabels[data['data'][i]['categoryid']]);
-                this.precrimeLabels[data['data'][i]['categoryid']]++;
-                //console.log(this.crimeLabels);
-            }
-            for (var j = 1; j < this.precrimeLabels.length; j++) {
-                this.dataCrimeArray.push(this.precrimeLabels[j]);
-            }
-            let sum = 0;
-            for (var k = 0; k < this.dataCrimeArray.length; k++) {
-                if (this.dataCrimeArray[k] != 0) {
-                    this.crimeLabels.push(this.crimeDict[k + 1]);
-                    this.crimeData.push(this.dataCrimeArray[k]);
-                    this.dataColors.push(this.colors[k]);
-                    sum += this.dataCrimeArray[k];
-                }
-            }
-            console.log("making pie");
-            console.log(this.crimeLabels);
-            console.log(this.crimeData);
-            console.log(this.colors);
-            var canvas = <HTMLCanvasElement>document.getElementById('pieChart');
-            var ctx = canvas.getContext('2d');
-            this.myPieChart = new Chart(ctx, {
-                type: 'pie',
-                data: {
-                    datasets: [{
-                        data: this.crimeData,
-                        backgroundColor: this.dataColors,
-                        borderWidth: 0
-
-                    }],
-                    labels: this.crimeLabels
-                },
-                options: {
-                    tooltips: {
-                        callbacks: {
-                            label: function (tooltipItem, data) {
-                                var dataset = data.datasets[tooltipItem.datasetIndex];
-                                var labels = data.labels;
-                                console.log(dataset)
-                                console.log(labels)
-                                var currentValue = labels[tooltipItem.index] + " - " + dataset.data[tooltipItem.index];
-                                return currentValue + "%";
-                            }
-                        }
-                    }
-                }
-            })
+            this.formatData();
         })
     }
+    getCrimesForLine() {
+        console.log("In filter");
+        this.searchParams = {};
+        this.searchParams = {
+            start_date: "2015-11-15",
+            end_date: "2015-11-15"
+        };
+        let observable = this._httpService.getCrimesCount(this.searchParams);
+        observable.subscribe(data => {
+            console.log("Here were the entered search params");
+            console.log(this.searchParams);
+            this.crimes = data["data"];
+            this.formatDataForLine();
+        })
+    }
+
+    formatData() {
+        this.dataCrimeArray = [];
+        this.crimeLabels = [];
+        this.crimeData = [];
+        this.dataColors = [];
+
+        for (var i = 0; i < this.crimes.length; i++) {
+            //console.log(this.crimes[i]);
+            //console.log('this is the category id', this.crimes[i]['categoryid']);
+            //console.log('this is the dict data of that id', this.crimeDict[this.crimes[i]['categoryid']]);
+            //console.log(this.crimeLabels[this.crimes[i]['categoryid']]);
+            this.precrimeLabels[this.crimes[i]['categoryid']]++;
+            //console.log(this.crimeLabels);
+        }
+        for (var j = 1; j < this.precrimeLabels.length; j++) {
+            this.dataCrimeArray.push(this.precrimeLabels[j]);
+        }
+        let sum = 0;
+        for (var k = 0; k < this.dataCrimeArray.length; k++) {
+            if (this.dataCrimeArray[k] != 0) {
+                this.crimeLabels.push(this.crimeDict[k + 1]);
+                this.crimeData.push(this.dataCrimeArray[k]);
+                this.dataColors.push(this.colors[k]);
+                sum += this.dataCrimeArray[k];
+            }
+        }
+        for (var l = 0; l < this.crimeData.length; l++) {
+            this.crimeData[l] = this.crimeData[l] / sum * 100;
+            this.crimeData[l] = this.crimeData[l].toFixed(2).toString();
+        }
+        console.log(this.dataCrimeArray);
+        console.log(this.crimeLabels);
+        console.log("Here are some graph crimes");
+        console.log(this.crimes);
+        this.makePieChart();
+    }
+    formatDataForLine () {
+        this.dataCrimeArray = [];
+        this.crimeLabels = [];
+        this.crimeData = [];
+        this.dataColors = [];
+        var count = 0;
+        for (var i = 0; i < this.crimes.length; i++) {
+            if(!this.dateDict[this.crimes[i]['date']]){
+              this.dateDict[this.crimes[i]['date']] = count;
+              this.dateArray.push(1);
+              count++;
+            }
+            else {
+              this.dateArray[this.dateDict[this.crimes[i]['date']]]++;
+          }
+            //console.log("Here is dateDict", this.dateDict);
+            //console.log("Here is dateArray", this.dateArray);
+            //console.log(this.crimes[i]);
+            //console.log('this is the category id', this.crimes[i]['categoryid']);
+            //console.log('this is the dict data of that id', this.crimeDict[this.crimes[i]['categoryid']]);
+            //console.log(this.crimeLabels[this.crimes[i]['categoryid']]);
+            this.precrimeLabels[this.crimes[i]['categoryid']]++;
+            //console.log(this.crimeLabels);
+        }
+        for (var j = 1; j < this.precrimeLabels.length; j++) {
+            this.dataCrimeArray.push(this.precrimeLabels[j]);
+        }
+        let sum = 0;
+        for (var k = 0; k < this.dataCrimeArray.length; k++) {
+            if (this.dataCrimeArray[k] != 0) {
+                this.crimeLabels.push(this.crimeDict[k + 1]);
+                this.crimeData.push(this.dataCrimeArray[k]);
+                this.dataColors.push(this.colors[k]);
+                sum += this.dataCrimeArray[k];
+            }
+        }
+        for (var l = 0; l < this.crimeData.length; l++) {
+            this.crimeData[l] = this.crimeData[l] / sum * 100;
+            this.crimeData[l] = this.crimeData[l].toFixed(2).toString();
+        }
+        //console.log(this.dataCrimeArray);
+        //console.log(this.crimeLabels);
+        //console.log("Here are some graph crimes");
+        //console.log(this.crimes);
+        this.makeLineChart();
+    }
+    //filterCrimesForPie() {
+    //  this.crimeLabels = [];
+    //  this.precrimeLabels = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    //  this.dataCrimeArray = [];
+    //  this.dataColors = [];
+    //  this.crimeData = [];
+    //  console.log("In filter");
+    //  let observable = this._httpService.getCrimesCount(this.searchParams);
+    //  observable.subscribe(data => {
+    //    console.log("Here were the entered search params");
+    //    console.log(this.searchParams);
+    //    this.crimes = data["data"];
+
+    //                 }],
+    //                 labels: this.crimeLabels
+    //             },
+    //             options: {
+    //                 tooltips: {
+    //                     callbacks: {
+    //                         label: function (tooltipItem, data) {
+    //                             var dataset = data.datasets[tooltipItem.datasetIndex];
+    //                             var labels = data.labels;
+    //                             console.log(dataset)
+    //                             console.log(labels)
+    //                             var currentValue = labels[tooltipItem.index] + " - " + dataset.data[tooltipItem.index];
+    //                             return currentValue + "%";
+    //                         }
+    //                     }
+    //                 }
+    //             }
+    //         })
+    //     })
+    // }
 }

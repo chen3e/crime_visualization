@@ -6,6 +6,10 @@ module.exports = function (app) {
         crimes.getCrimes(req, res);
     })
 
+    app.post("/crimes/count", function (req, res) {
+        crimes.findCrimesCount(req, res);
+    })
+
     app.post("/crimes", function(req, res) {
         crimes.filterCrimes(req, res);
     })
@@ -23,7 +27,7 @@ module.exports = function (app) {
        console.log("in findcrimeforme");
        crimes.findCrimeForMe(req, res);
     })
-
+    
     app.all("*", (req, res, next) => {
         res.sendFile(path.resolve("./public/dist/public/index.html"))
     });

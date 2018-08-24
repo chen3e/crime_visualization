@@ -10,7 +10,7 @@ import { DataComponent } from '../data/data.component';
 export class DataSearchComponent implements OnInit {
     searchParams = {
         keyword: null,
-        categoryid : null,
+        categoryid: null,
         region: null,
         start_date: null,
         end_date: null
@@ -48,13 +48,20 @@ export class DataSearchComponent implements OnInit {
                         description[this._data.crimes[i].description[j][0]] = true;
                     }
                 }
+<<<<<<< HEAD
                 this._data.crimes[i].description = description;
                 console.log(this._data.crimes[i].description);
+=======
+                let image = {
+                    url: `assets/img/${this._data.crimes[i].catname.split(" ").join("")}.png`,
+                }
+                this._data.crimes[i].description = description;
+                console.log(this._data.crimes[i].description);
+                this._data.crimes[i].icon = image;
+>>>>>>> 0f3033d1dbb74bc923f489d4070972acad89b947
             }
         })
     }
-    
-    
 
     show() {
         if (!this.showSearch) {
