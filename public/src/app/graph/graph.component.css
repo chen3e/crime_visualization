@@ -19,6 +19,7 @@
     display: inline-block;
     margin-top: 1vh;
     background-color: rgba(255, 255, 255, 0.75);
+    border-radius: 20px;
 }
 
 .graphs h2 {

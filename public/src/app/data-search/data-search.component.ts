@@ -32,6 +32,25 @@ export class DataSearchComponent implements OnInit {
             console.log("Crimes:")
             this._data.crimes = data["data"];
             console.log(this._data.crimes);
+            for (let i = 0; i < this._data.crimes.length; i++) {
+                this._data.crimes[i].description = this._data.crimes[i].description.split('BR&gt;');
+                let description = {};
+                for (let j = 0; j < this._data.crimes[i].description.length; j++) {
+                    this._data.crimes[i].description[j] = this._data.crimes[i].description[j].split(":");
+                    console.log(this._data.crimes[i].description[j]);
+                    if (this._data.crimes[i].description[j][2]) {
+                        description[this._data.crimes[i].description[j][0]] = this._data.crimes[i].description[j][1] + ":" + this._data.crimes[i].description[j][2].replace("&lt;", "");
+                    }
+                    else if (this._data.crimes[i].description[j][1]) {
+                        description[this._data.crimes[i].description[j][0]] = this._data.crimes[i].description[j][1].replace("&lt;", "");
+                    }
+                    else {
+                        description[this._data.crimes[i].description[j][0]] = true;
+                    }
+                }
+                this._data.crimes[i].description = description;
+                console.log(this._data.crimes[i].description);
+            }
         })
     }
     
