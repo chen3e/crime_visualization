@@ -135,14 +135,14 @@ module.exports = {
             }
         }
         console.log(searchParams['categoryid']);
-        if (searchParams['categoryid']) {
-            searchParams['categoryid'] = { $in: searchParams['categoryid'] };
-        }
+        // if (searchParams['categoryid']) {
+        //     searchParams['categoryid'] = { $in: searchParams['categoryid'] };
+        // }
 
-        if (searchParams['keyword']) {
-            searchParams['description'] = { "$regex": searchParams['keyword'], "$options": "i" };
-            delete searchParams['keyword'];
-        }
+        // if (searchParams['keyword']) {
+        //     searchParams['description'] = { "$regex": searchParams['keyword'], "$options": "i" };
+        //     delete searchParams['keyword'];
+        // }
 
         if (searchParams['start_date'] && searchParams['end_date']) {
             searchParams['date'] = { "$gte": searchParams['start_date'], "$lte": searchParams['end_date'] };
