@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import { } from '@types/googlemaps';
 
 declare var google: any;
 
@@ -20,7 +19,6 @@ export class MapComponent implements OnInit {
     constructor(private _httpService: HttpService) { }
 
     ngOnInit() {
-        Cache = null;
         this.getCrimes();
     }
 
