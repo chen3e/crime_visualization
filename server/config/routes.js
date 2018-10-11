@@ -10,10 +10,6 @@ module.exports = function (app) {
         crimes.filterCrimes(req, res);
     })
 
-    app.post("/postingdata", function(req, res) {
-        crimes.makeCrimes(req, res);
-    })
-
     app.all("*", (req, res, next) => {
         res.sendFile(path.resolve("./public/dist/public/index.html"))
     });

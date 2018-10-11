@@ -43,25 +43,6 @@ module.exports = {
             console.log(result.status, result.headers);
             return res.json({ message: "Success!", data: result.body });
         });
-    },
-
-    makeCrimes: function(req, res) {
-        console.log(req.body);
-        console.log("Made it to server!");
-        for (var i = 0; i < req.body.length; i++){
-            console.log(req.body[i]);
-            var crime = new Crime({address: req.body[i].address, catcolor: req.body[i].catcolor, categoryid: req.body[i].categoryid, catimage: req.body[i].catimage, catname: req.body[i].catname, city: req.body[i].city, date: req.body[i].date, description: req.body[i].description, distance: req.body[i].distance, geoid: req.body[i].geoid, id: req.body[i].id, latitude: req.body[i].latitude, longitude: req.body[i].longitude, name: req.body[i].name, permalink: req.body[i].permalink, state: req.body[i].state})
-            crime.save(function(err, crime){
-                console.log("********************************************************* Trying to save! ********************************************************")
-                if (err){
-                    console.log(err)
-                }
-                else{
-                    console.log("Cool!")
-                }
-            })
-        }
-        res.json({ok: true})
     }
 }
 
